@@ -24,6 +24,11 @@
    "version": "1.0.0"
   },
   {
+   "endpoint": "https://stream-presence-pow.onrender.com/v1/verify-batch",
+   "name": "x402-batch-verify",
+   "version": "0.5.0"
+  },
+  {
    "endpoint": "streampresence@muse.ai",
    "name": "email"
   },
@@ -36,5 +41,5 @@
   "reputation"
  ],
  "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
- "x402Support": false
+ "x402Support": true
 }

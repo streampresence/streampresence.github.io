@@ -1,4 +1,4 @@
-# Receipts — Spec v0.1, with v0.2, v0.3 and v0.4 extensions
+# Receipts — Spec v0.1, with v0.2, v0.3, v0.4 and v0.5 extensions
 
 *Stream Presence. Signed action receipts + binding approval objects for
 AI agents. Experiment: 14-day public dogfood from 2026-11-17.
@@ -458,6 +458,8 @@ log, the headline does not render: an unproven pool gets no headline.
   there is no back door.)
 - `GET /v1/verify/{receipt_id}` — public, free forever, no account.
   This page performs the identical recompute in your browser.
+- `POST /v1/verify-batch` — volume machine verification, metered
+  via x402 on Base (see "x402-paid batch verification (v0.5)").
 
 ## A2A endpoint (v1.0)
 
@@ -512,6 +514,56 @@ signature item in the experiment plan). Until it ships, the
 documented interim paths (streampresence@muse.ai, Moltbook,
 Agentverse) reach the same skills, and verification never depends
 on our server at all — recompute from the public log.
+
+## x402-paid batch verification (v0.5)
+
+*Build roadmap step 3, shipped 2026-11-21. The monetization line,
+drawn exactly where the roadmap drew it: verification for humans
+stays free — the browser verifier and `GET /v1/verify/{id}` are
+free forever, in writing — and machine verification AT VOLUME is
+metered via x402 on Base.*
+
+- `POST /v1/verify-batch` — body `{"receipt_ids": ["rcpt_…", …],
+  "by": "optional caller id"}` (1–100 ids). Returns the same
+  verdict objects as `GET /v1/verify/{id}`, one per id, plus a
+  `metering` block stating the caller, the free allowance, what
+  was free, and what was billable. `GET /v1/verify-batch` returns
+  the machine-readable offer (price, network, asset, payTo).
+- **Free allowance:** the first **100** batch verifications per
+  caller per UTC day are free. The caller is the body's `by`
+  field, else the client IP. Allowance state is metering, not
+  money; it resets daily.
+- **Price:** receipts beyond the allowance are billable at
+  **0.001 USDC per receipt** (1000 USDC atomic units). The 402
+  challenge prices exactly the billable count of the request
+  being answered — no bundles, no minimums.
+- **Payment (x402, scheme `exact`):** an unpaid billable call is
+  answered **402** with the payment requirements in the JSON body
+  (`x402Version: 1`, `accepts: […]`) and in a `PAYMENT-REQUIRED`
+  header (v2 shape). Network `eip155:8453` (Base), asset USDC
+  (`0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913`), payTo the Stream
+  Presence Base wallet (`0xD83946Ca02B8A346a74535Fe0548A46EB2aDa6de`).
+  The client retries with an `X-PAYMENT` (v1) or
+  `PAYMENT-SIGNATURE` (v2) header carrying an EIP-3009
+  `transferWithAuthorization` signed by the payer; a successful
+  settlement is answered with a `PAYMENT-RESPONSE` header.
+- **Verification of the payment itself is deterministic code:**
+  the server checks scheme / network / asset / payTo / amount /
+  validity window structurally, then recovers the EIP-712 signer
+  locally (the authorization must recover to its `from`), and
+  burns the authorization nonce — a nonce is single-use, and a
+  replayed payment is rejected at the gate. Only then is the
+  payload settled through the configured x402 facilitator
+  (`/verify` + `/settle`).
+- **Settlement honesty:** this node holds no EVM key and
+  broadcasts nothing, so settlement runs through a facilitator.
+  Until a facilitator is configured on the public node
+  (`X402_FACILITATOR_URL`; a mainnet facilitator such as Coinbase
+  CDP needs API credentials — a founder-gated item), the endpoint
+  meters and issues correct 402 challenges live, and a payment
+  attempt is answered 402 with the disclosed error
+  `facilitator_not_configured`. A settlement is never claimed
+  that did not happen.
 
 ## Verification requests (intake)
 

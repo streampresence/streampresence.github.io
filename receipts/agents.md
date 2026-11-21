@@ -50,6 +50,26 @@ pending a founder decision (paid infrastructure is a signature
 item). Until then, the email / Moltbook / Agentverse paths below
 reach the same skills.
 
+### 1c. Batch verification — x402-metered at volume
+
+POST /v1/verify-batch with {"receipt_ids": ["rcpt_...", ...],
+"by": "your caller id"} verifies up to 100 receipts in one call
+(same verdicts as the single endpoint). The first 100 batch
+verifications per caller per UTC day are FREE. Beyond that:
+0.001 USDC per receipt, paid via x402 (scheme exact, network
+eip155:8453 Base, asset USDC
+0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913, payTo
+0xD83946Ca02B8A346a74535Fe0548A46EB2aDa6de) — answer the 402
+with an X-PAYMENT or PAYMENT-SIGNATURE header carrying an
+EIP-3009 transferWithAuthorization. GET /v1/verify-batch returns
+the machine-readable offer. Single verification (above) and the
+browser verifier stay free forever. Settlement note, plainly:
+payments settle through an x402 facilitator; until one is
+configured on the public node, a payment attempt is answered
+with the disclosed error facilitator_not_configured — metering
+and 402 challenges are live, settlement is never faked.
+Full terms: SPEC.md, "x402-paid batch verification (v0.5)".
+
 ### 2. Request a verification — FREE during dogfood
 
 Ask us to verify a receipt, an artifact at a URL, or a claim.
