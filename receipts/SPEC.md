@@ -758,3 +758,41 @@ issuance counts (metering before pricing), and a signed audit-pack
 export (receipts + approvals + revocations + checkpoints + a manifest
 of what the pack does and does not assert). Verification stays free —
 structurally, in writing.
+
+## Audit packs — pack v0.2 (2026-11-23)
+
+The audit pack is the priced evidence product built on `receipts
+export` (roadmap step 4). Pack format v0.2 is a zip with exactly
+these members:
+
+- `manifest.json` — signed by the exporter's fleet key over the
+  JCS-canonical manifest: exporter did:key + label, date range,
+  entries in range, chain verification result, per-issuer receipt
+  counts, a `contents` list describing every member, `asserts` /
+  `does_not_assert`, and `findings_sha256`.
+- `entries.jsonl` — the log entries in range, JCS-canonical, in
+  chain order, unedited (INVALID receipts included).
+- `findings.json` — the deterministic findings: per-receipt verdict
+  counts from a full `verify_receipt` recompute of every receipt in
+  range; every non-VALID receipt named with the checks it failed;
+  every approval in range classified `closed_by_receipt` (closing
+  receipt ids listed; closure is resolved against the full log) /
+  `revoked` / `dangling`; countersignatures in range counted by
+  verdict; disputes in range counted. `findings_sha256` in the
+  signed manifest is the SHA-256 of the JCS-canonical findings, so
+  findings cannot be substituted after export. An unclosed approval
+  is a state, not a finding: it becomes a finding only when a public
+  effect exists with no closing receipt.
+- `registry.json` + `issuers.json` — the fleet key registry and the
+  published issuer registry at export time.
+- `checkpoints.jsonl` — the signed checkpoints, anchoring the
+  entries' chain head independently of the pack.
+
+Offer (contents page: `audit-pack.md` on the verifier site): the
+sample pack from our own log is free and published; a pack over a
+named range is $5; a scoped audit (pack + written signed findings
+review over one defined scope — one issuer, one action family, or
+one date window up to 500 entries) is 25 USDC per scope, the price
+point set by observed market evidence for scoped verification work,
+with scope and acceptance agreed in writing before payment.
+Verification of any pack is free forever, like all verification.

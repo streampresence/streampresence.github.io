@@ -1,0 +1,54 @@
+{
+  "asserts": [
+    "these signed objects were present in the append-only log in this order at export time",
+    "each object's Ed25519 signature verifies against its issuer/approver did:key",
+    "the findings were produced by re-running the public verification recompute over every receipt in the range at export time, and findings.json hashes to the findings_sha256 in this signed manifest"
+  ],
+  "chain_verification": "204 entries, chain intact",
+  "contents": [
+    {
+      "file": "manifest.json",
+      "what": "this signed manifest (exporter, range, chain state, findings hash, asserts / does-not-assert)"
+    },
+    {
+      "file": "entries.jsonl",
+      "what": "the log entries in range, JCS-canonical, in chain order"
+    },
+    {
+      "file": "findings.json",
+      "what": "deterministic verification summary over the range (verdict counts, non-VALID receipts named, approval closure states, countersignature/dispute counts)"
+    },
+    {
+      "file": "registry.json",
+      "what": "the fleet key registry (label -> did:key) the signatures verify against"
+    },
+    {
+      "file": "issuers.json",
+      "what": "the published issuer registry (classes, statuses, caps) at export time"
+    },
+    {
+      "file": "checkpoints.jsonl",
+      "what": "the signed chain checkpoints, so the entries' chain head can be anchored independently of this pack"
+    }
+  ],
+  "date_from": "2026-11-17",
+  "date_to": "2026-11-23",
+  "does_not_assert": [
+    "that the action was wise, safe, or a good idea",
+    "that the action was authorized by any party other than the named approver (when an approval is bound)",
+    "that args_public is complete for receipts where it is absent \u2014 absent args are proven by hash only, on disclosure by a holder",
+    "that the artifact at artifact_url still exists or is unchanged beyond its result_hash at issuance time",
+    "the real-world identity behind a did:key beyond its registry entry"
+  ],
+  "entries_in_range": 204,
+  "exporter": "did:key:z6MkwB88YSpduPYgbL9CPm3bnNCzgb7NxuLnvMHLNFZgkGJs",
+  "exporter_label": "muse",
+  "findings_sha256": "sha256:032160970defb2b65aa5380cd304973b996e17e43a6561db24a1dc9ce254f47b",
+  "generated_at": "2026-11-23T16:08:30Z",
+  "issuer_counts_in_range": {
+    "muse": 127,
+    "scout": 70
+  },
+  "pack_version": "0.2",
+  "signature": "jfzQWIFy48ksCoyzAKaM-mCFDFbRMi7gMIgD8pA0UZD-2Ak6jSaGbYSREIsPG5DBk7xclBUN1PZscv_J90AQBw"
+}

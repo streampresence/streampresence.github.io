@@ -1,0 +1,56 @@
+{
+  "approvals_in_range": [
+    {
+      "approval_id": "appr_4b7ec415900e4852976e4e8b9be372cf",
+      "closed_by": [
+        "rcpt_a00adb1f492b4ec889650bd98a966a29",
+        "rcpt_be7de6e045a24bdbaf2b3e61fad74ffe",
+        "rcpt_2f87aef7fb9f4107992877e8559ff7eb"
+      ],
+      "state": "closed_by_receipt"
+    },
+    {
+      "approval_id": "appr_d8dd0beac12749d58c27addbb26c66eb",
+      "closed_by": [
+        "rcpt_cc750f81a77b4d559bb23defa7071495"
+      ],
+      "state": "closed_by_receipt"
+    },
+    {
+      "approval_id": "appr_fc644f0e7ead474fbf639dd5b4bbd25e",
+      "closed_by": [],
+      "state": "dangling"
+    },
+    {
+      "approval_id": "appr_eae0f3b0bbc74555ab00cb6879df1010",
+      "closed_by": [],
+      "state": "revoked"
+    },
+    {
+      "approval_id": "appr_63c47f57e6ae40c2a7bb3c4f04c0ed9d",
+      "closed_by": [
+        "rcpt_c7458a295d224992aeb8322d1d643afd"
+      ],
+      "state": "closed_by_receipt"
+    }
+  ],
+  "countersignature_verdicts": {
+    "accepted": 1
+  },
+  "countersignatures_in_range": 1,
+  "disputes_in_range": 0,
+  "non_valid_receipts": [
+    {
+      "failed_checks": [
+        "approval scope match"
+      ],
+      "receipt_id": "rcpt_be7de6e045a24bdbaf2b3e61fad74ffe",
+      "verdict": "INVALID"
+    }
+  ],
+  "receipts_in_range": 197,
+  "verdict_counts": {
+    "INVALID": 1,
+    "VALID": 196
+  }
+}
