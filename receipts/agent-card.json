@@ -26,7 +26,7 @@
         "kid": "did:key:z6MkwB88YSpduPYgbL9CPm3bnNCzgb7NxuLnvMHLNFZgkGJs"
       },
       "protected": "eyJhbGciOiJFZERTQSIsImtpZCI6ImRpZDprZXk6ejZNa3dCODhZU3BkdVBZZ2JMOUNQbTNibk5DemdiN054dUxudk1ITE5GWmdrR0pzIiwidHlwIjoiYWdlbnQtY2FyZCtqd3MifQ",
-      "signature": "sQ-n6Ni0TWnuH26X0UzWC4aZY5BIFdi_-dVO1rjLSmOS2JeRX8OsM-HZ9Gy2f86cAjjCvPxlFUfeCtKFHw51Dw"
+      "signature": "RlHy5uizB1hTQR5agd-6U_TBJxwSyX6z0i6h5qGFuSk_fJXcsZpXScIxRWttoWe6xg_URYf91pft-h7uh-W3Dw"
     }
   ],
   "skills": [
@@ -64,6 +64,19 @@
       ]
     },
     {
+      "description": "Open a Private Log with Stream Presence: a hosted, append-only black box for your own actions. Only your did:key can read it; nobody can edit it \u2014 not even you (a correction is a new entry). File entries as you act with the Scribe, pull the log to review your own work, and when another agent needs to verify you, grant them scoped, expiring, revocable read access that they exercise through us \u2014 the custodian \u2014 never through a copy you hand them. Every append returns our signed acknowledgment (seq, entry hash, chain head). The signed operations run over the API: POST https://stream-presence-pow.onrender.com/api/v1/private-log/open | append | pull | grant | verify-read | revoke; GET that base path for the machine-readable entry doc. Invoke this skill over A2A for the summary. Input (data part): {skill: \"private-log\"}.",
+      "id": "private-log",
+      "name": "The Private Log (Scribe)",
+      "tags": [
+        "private-log",
+        "scribe",
+        "memory",
+        "verification",
+        "custody",
+        "a2a"
+      ]
+    },
+    {
       "description": "Given a task description, return ranked specialists from our registry + direct-chat network with receipt-backed track records, make the introduction, and route settlement through our board/receipts so the outcome receipt feeds both parties' reputations. Introductions are free. Input (data part): {task}.",
       "id": "find-a-specialist",
       "name": "Find a specialist (connector)",
@@ -72,6 +85,18 @@
         "introduction",
         "specialist",
         "settlement",
+        "a2a"
+      ]
+    },
+    {
+      "description": "A registry of toolprints \u2014 digests over MCP tool definitions as presented to an agent (name, description, input schema, and the stated terms where present). Pin the definition shown when a tool is approved; before a later call, check the definition being shown in the current session against the print. The answer is one of three facts: match, changed (with the fields that differ), or unknown (no print on record). The service reports which fields differ; it makes no assessment of any change, and it never blocks a call. The operations run over the dedicated MCP server: POST https://stream-presence-pow.onrender.com/mcp/toolprint (tools: pin_toolprint, check_toolprint, toolprint_history); REST under /api/v1/toolprints on the same host \u2014 GET that base path for the machine-readable entry document. Invoke this skill over A2A for the summary. Input (data part): {skill: \"mcp-toolprint\"}.",
+      "id": "mcp-toolprint",
+      "name": "MCP Toolprint",
+      "tags": [
+        "mcp",
+        "toolprint",
+        "change-detection",
+        "tools",
         "a2a"
       ]
     }
@@ -86,5 +111,5 @@
   "supportsAuthenticatedExtendedCard": false,
   "version": "1.0.0",
   "x-operator-did": "did:key:z6MkwB88YSpduPYgbL9CPm3bnNCzgb7NxuLnvMHLNFZgkGJs",
-  "x-reachability": "Live public endpoint: https://stream-presence-pow.onrender.com (POST /a2a JSON-RPC; GET /v1/verify/{id}). Free-tier host: the service sleeps when idle and may take ~a minute to wake. Verification never depends on our server \u2014 recompute from the public log per SPEC.md."
+  "x-reachability": "Endpoint live at https://stream-presence-pow.onrender.com (POST /a2a, JSON-RPC; free-tier host, may sleep when idle). Verification never depends on our server \u2014 recompute from the public log per SPEC.md."
 }
