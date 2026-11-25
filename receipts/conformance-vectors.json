@@ -1,0 +1,1071 @@
+{
+  "cases": [
+    {
+      "description": "A plain day-1 fleet receipt (scout.card_filed) with public args, no approval binding, no countersignature, no dispute.",
+      "expected": {
+        "approval": null,
+        "countersignature_state": null,
+        "countersigned": false,
+        "dispute_state": null,
+        "failing_checks": [],
+        "issuer_class": "fleet",
+        "verdict": "VALID"
+      },
+      "id": "valid-plain-scout-card",
+      "inputs": {
+        "at_time": "2026-11-25T17:56:04Z",
+        "log_slice": {
+          "from_seq": 0,
+          "slice_head_entry_hash": "abdb530d3e496419436c60c4d01104185bc8eb5f01eb448850a19a08156a204f",
+          "source": "https://streampresence.github.io/receipts/receipts.jsonl",
+          "through_seq": 8
+        },
+        "registries": "suite"
+      },
+      "kind": "verify",
+      "receipt": {
+        "action": {
+          "args_hash": "sha256:cbe70ae5e719feb79d3fd377d40b1cb5780830f1ebf81146c3f99bd9f397bac1",
+          "args_public": {
+            "card_id": "SCOUT-2026-11-17-1",
+            "title": "A coding agent improved itself almost as much as the best self-improving systems without ever testing its new versions on the real tasks \u2014 it just merged the good ideas from its own drafts"
+          },
+          "occurred_at": "2026-11-17T14:44:00Z",
+          "result_hash": "sha256:eb6fd7d5b51a1b36e0163249e2a1ee20db4d2f6007c0cbd50498cc6c5d419d94",
+          "type": "scout.card_filed"
+        },
+        "issued_at": "2026-11-17T20:59:58Z",
+        "issuer": "did:key:z6MkhwynbbvzuGj4QpUtAGNJmu9jc4nEonAfwcyZUy5FCyFb",
+        "issuer_label": "scout",
+        "prev_receipt_hash": "GENESIS",
+        "receipt_id": "rcpt_0ba6b7e64cb94c66a454ee99af4f6b3d",
+        "receipt_version": "0.1",
+        "signature": "fS2_TfrG_z27VYduUOYLmJNQw2YHp_ACqEWfhzjCJkdb0OlBmTeTEYyELWqzMVDzVYkFSPUCt2mO5gfcvhbABg"
+      },
+      "synthetic": false,
+      "target_receipt_id": "rcpt_0ba6b7e64cb94c66a454ee99af4f6b3d",
+      "why": "The baseline: chain intact, issuer signature valid, issuer registered (fleet), per-issuer chain link correct (this is scout's first receipt, so prev_receipt_hash is the literal GENESIS). Everything a minimal conforming receipt must pass."
+    },
+    {
+      "description": "The day-1 C6 receipt (handoff.completed, muse) \u2014 the INVALID half of the ARC C6 case, exactly as published in the log.",
+      "expected": {
+        "approval": "INVALID",
+        "countersignature_state": null,
+        "countersigned": false,
+        "dispute_state": null,
+        "failing_checks": [
+          "approval scope match"
+        ],
+        "issuer_class": "fleet",
+        "verdict": "INVALID"
+      },
+      "id": "invalid-c6-approval-scope",
+      "inputs": {
+        "at_time": "2026-11-25T17:56:04Z",
+        "log_slice": {
+          "from_seq": 0,
+          "slice_head_entry_hash": "d79474e5b0faa6d1f3517b96577b4189e6f563543d27fdb2e780ccce95014b7d",
+          "source": "https://streampresence.github.io/receipts/receipts.jsonl",
+          "through_seq": 16
+        },
+        "registries": "suite"
+      },
+      "kind": "verify",
+      "receipt": {
+        "action": {
+          "args_hash": "sha256:02a7113b1cc90fe380789e553b46b318875a8107d7f9e2d923f3a8696949e8d8",
+          "result_hash": null,
+          "type": "handoff.completed"
+        },
+        "approval": {
+          "approval_id": "appr_4b7ec415900e4852976e4e8b9be372cf",
+          "approval_target_hash": "sha256:3afc01ba42c8a83ef0ea8163815d5bc0e077d72a96c2d7904a391518046c54ee"
+        },
+        "issued_at": "2026-11-17T21:07:48Z",
+        "issuer": "did:key:z6MkwB88YSpduPYgbL9CPm3bnNCzgb7NxuLnvMHLNFZgkGJs",
+        "issuer_label": "muse",
+        "prev_receipt_hash": "b34bb63e198460d97cc083287488c1cd430fb26b69ca4ce25caeb96b72f3cb1a",
+        "receipt_id": "rcpt_be7de6e045a24bdbaf2b3e61fad74ffe",
+        "receipt_version": "0.1",
+        "signature": "8oApmd-ki8pATI0aoRkEs2hrPHAipzIucPTx1uD9QYBVWawy2w8_J2y_UbiSr3KLtDFhAAnLGfXCjeROWM_RBw"
+      },
+      "synthetic": false,
+      "target_receipt_id": "rcpt_be7de6e045a24bdbaf2b3e61fad74ffe",
+      "why": "Every cryptographic check passes \u2014 chain, issuer signature, registration, per-issuer link, the approval exists, is signed, unrevoked, and its target fingerprint matches. It is INVALID for exactly one reason: its action type (handoff.completed) is outside the scope of the approval it cites (appr_4b7ec415900e4852976e4e8b9be372cf). A verifier that only checks signatures will wrongly call this receipt VALID."
+    },
+    {
+      "description": "The corrected re-issue that supersedes the C6 receipt (experiment.build, muse), citing the same approval.",
+      "expected": {
+        "approval": "VALID",
+        "countersignature_state": null,
+        "countersigned": false,
+        "dispute_state": null,
+        "failing_checks": [],
+        "issuer_class": "fleet",
+        "verdict": "VALID"
+      },
+      "id": "valid-c6-supersession",
+      "inputs": {
+        "at_time": "2026-11-25T17:56:04Z",
+        "log_slice": {
+          "from_seq": 0,
+          "slice_head_entry_hash": "d79474e5b0faa6d1f3517b96577b4189e6f563543d27fdb2e780ccce95014b7d",
+          "source": "https://streampresence.github.io/receipts/receipts.jsonl",
+          "through_seq": 16
+        },
+        "registries": "suite"
+      },
+      "kind": "verify",
+      "receipt": {
+        "action": {
+          "args_hash": "sha256:2029c32335e4fb0f932ae6a9568f7946ca9085f240d927fa293d678e2ec44553",
+          "result_hash": null,
+          "type": "experiment.build"
+        },
+        "approval": {
+          "approval_id": "appr_4b7ec415900e4852976e4e8b9be372cf",
+          "approval_target_hash": "sha256:3afc01ba42c8a83ef0ea8163815d5bc0e077d72a96c2d7904a391518046c54ee"
+        },
+        "issued_at": "2026-11-17T21:08:43Z",
+        "issuer": "did:key:z6MkwB88YSpduPYgbL9CPm3bnNCzgb7NxuLnvMHLNFZgkGJs",
+        "issuer_label": "muse",
+        "prev_receipt_hash": "a3fb86d1c2821f62aa8300a48db734555f5b60b44c71101b926403b2d66c5551",
+        "receipt_id": "rcpt_2f87aef7fb9f4107992877e8559ff7eb",
+        "receipt_version": "0.1",
+        "signature": "b_52T39-zK-yiymikV6Df0_TQ6obqdfyifLl1KI93Oq2QMeR7wDmXhOvE2DJvrrT4fgMnoQs_CVvD7U1zZhgDA"
+      },
+      "synthetic": false,
+      "target_receipt_id": "rcpt_2f87aef7fb9f4107992877e8559ff7eb",
+      "why": "Same issuer, same approval, same log position neighbourhood as the INVALID case \u2014 but the action type is inside the approval's scope, so every check passes. The pair (cases invalid-c6-approval-scope / valid-c6-supersession) pins the approval-scope decision point: the difference between INVALID and VALID here is scope, not cryptography."
+    },
+    {
+      "description": "A merchant.sale receipt (muse) with a valid countersignature chained after it (scout, verdict accepted, seq 161).",
+      "expected": {
+        "approval": null,
+        "countersignature_state": "COUNTERSIGNED",
+        "countersigned": true,
+        "dispute_state": null,
+        "failing_checks": [],
+        "issuer_class": "fleet",
+        "verdict": "VALID"
+      },
+      "id": "countersigned-present",
+      "inputs": {
+        "at_time": "2026-11-25T17:56:04Z",
+        "log_slice": {
+          "from_seq": 0,
+          "slice_head_entry_hash": "5e87db1b4b2f9fe67f70ae0ea603a75667c507e5b2b23a31d152c6cece4b85ad",
+          "source": "https://streampresence.github.io/receipts/receipts.jsonl",
+          "through_seq": 161
+        },
+        "registries": "suite"
+      },
+      "kind": "verify",
+      "receipt": {
+        "action": {
+          "args_hash": "sha256:689a058fa2e5c8031864ec37160349e68f0e3d6c13f4b022f6fb8cd3220634fd",
+          "args_public": {
+            "buyer_agent": "did:key:z6MkhwynbbvzuGj4QpUtAGNJmu9jc4nEonAfwcyZUy5FCyFb",
+            "buyer_note": "the buying agent in this demo is played by the fleet agent 'scout'",
+            "currency": "USD",
+            "demo": true,
+            "fee_schedule": "demo: 2% micro-fee, min $0.01 (production pricing is the founder's call)",
+            "fee_usd": "0.48",
+            "gross_usd": "24.00",
+            "hosted_storefront": "/stores/harbor-pine-demo/ (demo: local server, hosted shape)",
+            "items": [
+              {
+                "name": "Cedar & Smoke Candle",
+                "quantity": 1,
+                "sku": "candle-cedar",
+                "unit_price_usd": "24.00"
+              }
+            ],
+            "kind": "merchant_sale",
+            "merchant": {
+              "identity_card": "https://stream-presence-pow.onrender.com/stores/harbor-pine-demo/identity-card.json (proposed hosted address; demo served locally)",
+              "name": "Harbor & Pine (FICTIONAL demo store)",
+              "slug": "harbor-pine-demo"
+            },
+            "net_usd": "23.52",
+            "order_id": "ord_demo_17aeeb2b8a51",
+            "payment": {
+              "boundary": "TEST DOUBLE \u2014 no Stripe API call was made; no real funds moved",
+              "checkout_session": "cs_test_DOUBLE_17aeeb2b8a51024eb41a",
+              "payment_intent": "pi_test_DOUBLE_c683f6bc6449436c5810",
+              "rail": "stripe",
+              "stripe_account": "acct_test_DOUBLE_harborpine"
+            },
+            "test_mode": true
+          },
+          "result_hash": null,
+          "type": "merchant.sale"
+        },
+        "issued_at": "2026-11-21T18:35:11Z",
+        "issuer": "did:key:z6MkwB88YSpduPYgbL9CPm3bnNCzgb7NxuLnvMHLNFZgkGJs",
+        "issuer_label": "muse",
+        "prev_receipt_hash": "24d1ab22e303b2aa70a3e53ced34197c7aa88669562e0b8d1b312b8ae88e0fab",
+        "receipt_id": "rcpt_00f960fc303444c6b9457baf7cf4547e",
+        "receipt_version": "0.1",
+        "signature": "KTWc3rDGjobN2HESUbFt423zFTQrc-6reIoZykCyNpT0tX3cb8VcgbFfFGXWZyTvbQ7Pgpbmd33KNeIHp7bVDg"
+      },
+      "synthetic": false,
+      "target_receipt_id": "rcpt_00f960fc303444c6b9457baf7cf4547e",
+      "why": "The receipt verifies VALID on its own checks, and the valid countersignature from the party named in its public args (buyer_agent = scout) closes the job on the record: countersigned = true, countersignature_state = COUNTERSIGNED. A countersignature never changes the receipt's own verdict \u2014 it is reported alongside it."
+    },
+    {
+      "description": "The same merchant.sale receipt, verified against the log as it stood one entry earlier \u2014 before the countersignature was appended.",
+      "expected": {
+        "approval": null,
+        "countersignature_state": null,
+        "countersigned": false,
+        "dispute_state": null,
+        "failing_checks": [],
+        "issuer_class": "fleet",
+        "verdict": "VALID"
+      },
+      "id": "countersigned-absent",
+      "inputs": {
+        "at_time": "2026-11-25T17:56:04Z",
+        "log_slice": {
+          "from_seq": 0,
+          "slice_head_entry_hash": "e3f52d74e9d5f4fbb09c84d678e6058a000b80bee3f506d934c35e2dc6c7bdda",
+          "source": "https://streampresence.github.io/receipts/receipts.jsonl",
+          "through_seq": 160
+        },
+        "registries": "suite"
+      },
+      "kind": "verify",
+      "receipt": {
+        "action": {
+          "args_hash": "sha256:689a058fa2e5c8031864ec37160349e68f0e3d6c13f4b022f6fb8cd3220634fd",
+          "args_public": {
+            "buyer_agent": "did:key:z6MkhwynbbvzuGj4QpUtAGNJmu9jc4nEonAfwcyZUy5FCyFb",
+            "buyer_note": "the buying agent in this demo is played by the fleet agent 'scout'",
+            "currency": "USD",
+            "demo": true,
+            "fee_schedule": "demo: 2% micro-fee, min $0.01 (production pricing is the founder's call)",
+            "fee_usd": "0.48",
+            "gross_usd": "24.00",
+            "hosted_storefront": "/stores/harbor-pine-demo/ (demo: local server, hosted shape)",
+            "items": [
+              {
+                "name": "Cedar & Smoke Candle",
+                "quantity": 1,
+                "sku": "candle-cedar",
+                "unit_price_usd": "24.00"
+              }
+            ],
+            "kind": "merchant_sale",
+            "merchant": {
+              "identity_card": "https://stream-presence-pow.onrender.com/stores/harbor-pine-demo/identity-card.json (proposed hosted address; demo served locally)",
+              "name": "Harbor & Pine (FICTIONAL demo store)",
+              "slug": "harbor-pine-demo"
+            },
+            "net_usd": "23.52",
+            "order_id": "ord_demo_17aeeb2b8a51",
+            "payment": {
+              "boundary": "TEST DOUBLE \u2014 no Stripe API call was made; no real funds moved",
+              "checkout_session": "cs_test_DOUBLE_17aeeb2b8a51024eb41a",
+              "payment_intent": "pi_test_DOUBLE_c683f6bc6449436c5810",
+              "rail": "stripe",
+              "stripe_account": "acct_test_DOUBLE_harborpine"
+            },
+            "test_mode": true
+          },
+          "result_hash": null,
+          "type": "merchant.sale"
+        },
+        "issued_at": "2026-11-21T18:35:11Z",
+        "issuer": "did:key:z6MkwB88YSpduPYgbL9CPm3bnNCzgb7NxuLnvMHLNFZgkGJs",
+        "issuer_label": "muse",
+        "prev_receipt_hash": "24d1ab22e303b2aa70a3e53ced34197c7aa88669562e0b8d1b312b8ae88e0fab",
+        "receipt_id": "rcpt_00f960fc303444c6b9457baf7cf4547e",
+        "receipt_version": "0.1",
+        "signature": "KTWc3rDGjobN2HESUbFt423zFTQrc-6reIoZykCyNpT0tX3cb8VcgbFfFGXWZyTvbQ7Pgpbmd33KNeIHp7bVDg"
+      },
+      "synthetic": false,
+      "target_receipt_id": "rcpt_00f960fc303444c6b9457baf7cf4547e",
+      "why": "Identical receipt, identical verdict (VALID), but countersigned = false and countersignature_state = null: absence of a countersignature does NOT make a receipt INVALID. It leaves the job visibly unclosed (SPEC closing state 5). Verifiers must not invent a failure here."
+    },
+    {
+      "description": "bounty.payout receipt for BNTY-003 (muse), public settlement args.",
+      "expected": {
+        "approval": null,
+        "countersignature_state": null,
+        "countersigned": false,
+        "dispute_state": null,
+        "failing_checks": [],
+        "issuer_class": "fleet",
+        "verdict": "VALID"
+      },
+      "id": "settlement-five-percent",
+      "inputs": {
+        "at_time": "2026-11-25T17:56:04Z",
+        "log_slice": {
+          "from_seq": 0,
+          "slice_head_entry_hash": "d030646ad37ed67d0002433582d7572ddee99071bca81dc596163522380677a7",
+          "source": "https://streampresence.github.io/receipts/receipts.jsonl",
+          "through_seq": 157
+        },
+        "registries": "suite"
+      },
+      "kind": "verify+settlement",
+      "receipt": {
+        "action": {
+          "args_hash": "sha256:8e4a54bf5a032c53eb1b7c3fde3b1bf3abee69f95f1b835e6241e5fea65a6492",
+          "args_public": {
+            "approved_by": "Johnny (owner, in chat 2026-11-21, first-payee amber approval covering BNTY-003+BNTY-009)",
+            "chain": "solana",
+            "claimant": "codex-data-studio",
+            "fee_usdc": "0.0025",
+            "gross_usdc": "0.05",
+            "job_id": "BNTY-003",
+            "net_usdc": "0.0475",
+            "payee": "7QLVFZ9cAxDeBV3NJHCco2Y1fyaWmRYH4xpUXqCEZk5n",
+            "tx": "LYeimrQ585aEr7VB9kQ5VtP8uwemHXGvSSgb3LdDV1uBPiSFWwbbgKpah4Q7TYqYmQdBcPBtykxjEqbbppP4mDa",
+            "verified_receipt": "rcpt_89699b8246b64baabc4a51c2533efef0"
+          },
+          "result_hash": null,
+          "type": "bounty.payout"
+        },
+        "issued_at": "2026-11-21T17:52:27Z",
+        "issuer": "did:key:z6MkwB88YSpduPYgbL9CPm3bnNCzgb7NxuLnvMHLNFZgkGJs",
+        "issuer_label": "muse",
+        "prev_receipt_hash": "12941d1590d916876278434ab3c65d84c2d902eda08211b3ffde5dbf3065677a",
+        "receipt_id": "rcpt_f7154c6bfbfb4ddc9bc08dd0d3194f2f",
+        "receipt_version": "0.1",
+        "signature": "h_3-_g37U-fJmQX19nvAcjTD3m6VQw39jLKL_yt6ZzGSbhS2YQhVulvnGSRoM7Sn2vneRxInZhB-uCuIAPMyAg"
+      },
+      "settlement": {
+        "arithmetic_matches_receipt": true,
+        "branch": "five-percent",
+        "expected_fee_usdc": "0.0025",
+        "expected_net_usdc": "0.0475",
+        "gross_usdc": "0.05",
+        "receipt_states_fee_usdc": "0.0025",
+        "receipt_states_net_usdc": "0.0475",
+        "rule": "fee = max(quantize(0.05 * gross, 6dp, ROUND_HALF_UP), 0.0005); net = gross - fee; Decimal arithmetic, amounts are decimal strings"
+      },
+      "synthetic": false,
+      "target_receipt_id": "rcpt_f7154c6bfbfb4ddc9bc08dd0d3194f2f",
+      "why": "The standard settlement branch: 5% of gross (0.05 USDC) is 0.0025, above the 0.0005 floor, so the percentage sets the fee and net = gross - fee. The receipt's stated fee/net must recompute exactly."
+    },
+    {
+      "description": "bounty.payout receipt for BNTY-010 (muse), public settlement args.",
+      "expected": {
+        "approval": null,
+        "countersignature_state": null,
+        "countersigned": false,
+        "dispute_state": null,
+        "failing_checks": [],
+        "issuer_class": "fleet",
+        "verdict": "VALID"
+      },
+      "id": "settlement-floor-boundary",
+      "inputs": {
+        "at_time": "2026-11-25T17:56:04Z",
+        "log_slice": {
+          "from_seq": 0,
+          "slice_head_entry_hash": "598b9088d9610e02bea4e6256589dc150f737353fc5aaa207695b2ecc684eb3c",
+          "source": "https://streampresence.github.io/receipts/receipts.jsonl",
+          "through_seq": 219
+        },
+        "registries": "suite"
+      },
+      "kind": "verify+settlement",
+      "receipt": {
+        "action": {
+          "args_hash": "sha256:000095c595b016146b14d160d0da7879349233a621c8e03ab984e22a0d0500ab",
+          "args_public": {
+            "approved_by": "Johnny (owner, in chat 2026-11-23, 'Yea settle Codex!' - approval covering the remaining 8 verified bounties)",
+            "chain": "solana",
+            "claimant": "codex-data-studio",
+            "fee_usdc": "0.0005",
+            "gross_usdc": "0.01",
+            "job_id": "BNTY-010",
+            "net_usdc": "0.0095",
+            "payee": "7QLVFZ9cAxDeBV3NJHCco2Y1fyaWmRYH4xpUXqCEZk5n",
+            "tx": "3NmAFaP8Um8toUAcjNtjQWREMyRjM1wrfK1q9wZYUyB4X7KDoLkV7uXbuwsZkQZBKRF6DPatzmogT4HfigjS71zc",
+            "verified_receipt": "rcpt_85e055cee8724e42941e456b504d5fc3"
+          },
+          "result_hash": null,
+          "type": "bounty.payout"
+        },
+        "issued_at": "2026-11-24T01:55:09Z",
+        "issuer": "did:key:z6MkwB88YSpduPYgbL9CPm3bnNCzgb7NxuLnvMHLNFZgkGJs",
+        "issuer_label": "muse",
+        "prev_receipt_hash": "5d65892df9fdd80b0f270a370f134e34265dc2ba126c9ee157196eb66253b512",
+        "receipt_id": "rcpt_7b67402dad904501b467ec87d28dcf59",
+        "receipt_version": "0.1",
+        "signature": "Zgh4F9Q9RoKbmccbP0kw0mToshX5IKbnufFnHs6VPcuVkJfsOERsD1HQaeBM_5KZNwSFsvBPj-e-2e1mxwArBQ"
+      },
+      "settlement": {
+        "arithmetic_matches_receipt": true,
+        "branch": "floor-boundary",
+        "expected_fee_usdc": "0.0005",
+        "expected_net_usdc": "0.0095",
+        "gross_usdc": "0.01",
+        "receipt_states_fee_usdc": "0.0005",
+        "receipt_states_net_usdc": "0.0095",
+        "rule": "fee = max(quantize(0.05 * gross, 6dp, ROUND_HALF_UP), 0.0005); net = gross - fee; Decimal arithmetic, amounts are decimal strings"
+      },
+      "synthetic": false,
+      "target_receipt_id": "rcpt_7b67402dad904501b467ec87d28dcf59",
+      "why": "The boundary where the two fee branches meet: 5% of gross (0.01 USDC) is exactly 0.0005 \u2014 the floor value itself. Both branches agree; fee = 0.0005, net = 0.0095. Implementations that use a strict-greater comparison or float arithmetic tend to get boundary cases like this wrong."
+    },
+    {
+      "description": "SYNTHETIC \u2014 derived from the real receipt in case valid-plain-scout-card by changing one public arg (card_id SCOUT-2026-11-17-1 -> SCOUT-2026-11-17-999) and recomputing the log entry hash so the chain stays internally consistent. Never in the real log.",
+      "expected": {
+        "approval": null,
+        "countersignature_state": null,
+        "countersigned": false,
+        "dispute_state": null,
+        "failing_checks": [
+          "issuer signature"
+        ],
+        "issuer_class": "fleet",
+        "verdict": "INVALID"
+      },
+      "id": "tampered-content",
+      "inputs": {
+        "at_time": "2026-11-25T17:56:04Z",
+        "log_entries": [
+          {
+            "entry_hash": "e27c510444646ddaa5796d678b7af48f2871dc9a01aac8fa07c12af46b04a39c",
+            "kind": "approval",
+            "object": {
+              "approval_id": "appr_4b7ec415900e4852976e4e8b9be372cf",
+              "approval_version": "0.1",
+              "approver": "did:key:z6Mkfytzysj75EBsRAkDPom1kWDbTJW3PRgEuxmRRQ6UPgkw",
+              "approver_label": "johnny",
+              "expires_at": null,
+              "expiry_conditions": [
+                "time",
+                "target_changed",
+                "superseded",
+                "revoked"
+              ],
+              "issued_at": "2026-11-17T20:59:58Z",
+              "object_fingerprint": "sha256:88d9e648043f3268d21e56950896733396a9e2d5e8977b6c6f8bf953248ba461",
+              "scope": {
+                "action_type": "experiment.build",
+                "constraints": {
+                  "max_amount_usd": 0
+                }
+              },
+              "signature": "En6Rr37YxU4UQ4O8pMqZnuT3vsDu7LYb6FdRlIpbERzlwO2UDuJhHrgkko_tsAqibj1IvLRG59YGiP72hS8HBw",
+              "status": "active",
+              "subject": "did:key:z6MkwB88YSpduPYgbL9CPm3bnNCzgb7NxuLnvMHLNFZgkGJs",
+              "target": {
+                "description": "Build Receipts v1 + start 14-day dogfood, exactly per RECEIPTS_EXPERIMENT_PLAN.md. Greenlit by Johnny in chat 2026-11-17 15:55 ET ('Build it \u2014 start the 14-day dogfood'). Approver key operated by Muse under that recorded direction (prototype key custody \u2014 see README).",
+                "target_hash": "sha256:3afc01ba42c8a83ef0ea8163815d5bc0e077d72a96c2d7904a391518046c54ee"
+              }
+            },
+            "prev_hash": "GENESIS",
+            "seq": 0,
+            "ts": "2026-11-17T20:59:58Z"
+          },
+          {
+            "entry_hash": "d708b20b718300b9f578dcf88f1d76216af466e2fb56aa96d08e2548405547de",
+            "kind": "receipt",
+            "object": {
+              "action": {
+                "args_hash": "sha256:0900d5dd6dc8026a2e6a13f440349e9eaf058aa6de9a87e8d095aec50aa9316d",
+                "result_hash": null,
+                "type": "experiment.build"
+              },
+              "approval": {
+                "approval_id": "appr_4b7ec415900e4852976e4e8b9be372cf",
+                "approval_target_hash": "sha256:3afc01ba42c8a83ef0ea8163815d5bc0e077d72a96c2d7904a391518046c54ee"
+              },
+              "issued_at": "2026-11-17T20:59:58Z",
+              "issuer": "did:key:z6MkwB88YSpduPYgbL9CPm3bnNCzgb7NxuLnvMHLNFZgkGJs",
+              "issuer_label": "muse",
+              "prev_receipt_hash": "GENESIS",
+              "receipt_id": "rcpt_a00adb1f492b4ec889650bd98a966a29",
+              "receipt_version": "0.1",
+              "signature": "jUlhZqCbqzCxAhOMwsWHi-xqv2UXtWXgL6O7Ic90MI6BH9QqiAhXv40TppQQaZ9OtK4rEXuYRxGDNAmkuh31Dw"
+            },
+            "prev_hash": "e27c510444646ddaa5796d678b7af48f2871dc9a01aac8fa07c12af46b04a39c",
+            "seq": 1,
+            "ts": "2026-11-17T20:59:58Z"
+          },
+          {
+            "entry_hash": "791f705c41d2bb324f599f22d2e5218b5792a0150d40fd24694cd768138a8eb7",
+            "kind": "receipt",
+            "object": {
+              "action": {
+                "args_hash": "sha256:6ac71bde9533fefe60f33bd704eb1ca9242598a4615a7c119caf1e2694042f18",
+                "args_public": {
+                  "agent": "streampresence",
+                  "platform": "moltbook.com"
+                },
+                "artifact_url": "https://www.moltbook.com/u/streampresence",
+                "occurred_at": "2026-11-17T20:26:00Z",
+                "result_hash": null,
+                "type": "moltbook.agent_registered"
+              },
+              "issued_at": "2026-11-17T20:59:58Z",
+              "issuer": "did:key:z6MkwB88YSpduPYgbL9CPm3bnNCzgb7NxuLnvMHLNFZgkGJs",
+              "issuer_label": "muse",
+              "prev_receipt_hash": "d708b20b718300b9f578dcf88f1d76216af466e2fb56aa96d08e2548405547de",
+              "receipt_id": "rcpt_a12fe99662a546b8a7f0962d07ab3ee1",
+              "receipt_version": "0.1",
+              "signature": "OC24AWzI_jfYxvqO0YoJjsPauoWSVE1Qmn7amUP2dAY2wk5MnFNSbkvTszgzePXChnO0HP3aX1dlCJhNXn12Bw"
+            },
+            "prev_hash": "d708b20b718300b9f578dcf88f1d76216af466e2fb56aa96d08e2548405547de",
+            "seq": 2,
+            "ts": "2026-11-17T20:59:58Z"
+          },
+          {
+            "entry_hash": "01f820b4f143d382b3e3ae1748acbf9f06ab8d8f7d1141647cbc3f389611633b",
+            "kind": "receipt",
+            "object": {
+              "action": {
+                "args_hash": "sha256:d783ddc1cbc615033d1b7d445483fbd044a4e06122bbc8e6ee44690401bbbc3c",
+                "args_public": {
+                  "agent": "streampresence",
+                  "owner": "streamofscene",
+                  "verified_via": "x post from @Stream96present"
+                },
+                "artifact_url": "https://x.com/Stream96present/status/2122791693455949947",
+                "occurred_at": "2026-11-17T20:39:00Z",
+                "result_hash": null,
+                "type": "moltbook.agent_claimed"
+              },
+              "issued_at": "2026-11-17T20:59:58Z",
+              "issuer": "did:key:z6MkwB88YSpduPYgbL9CPm3bnNCzgb7NxuLnvMHLNFZgkGJs",
+              "issuer_label": "muse",
+              "prev_receipt_hash": "791f705c41d2bb324f599f22d2e5218b5792a0150d40fd24694cd768138a8eb7",
+              "receipt_id": "rcpt_57a7994644474fc5901190debc976b3c",
+              "receipt_version": "0.1",
+              "signature": "uougKjSW5sWn9pX-zE5EwNNsg7FMsPhfCuK7kHpwNg2ibXKRgmxHmhDzZMle9joc7Pll5aTKWVP2yNSnFOt9DQ"
+            },
+            "prev_hash": "791f705c41d2bb324f599f22d2e5218b5792a0150d40fd24694cd768138a8eb7",
+            "seq": 3,
+            "ts": "2026-11-17T20:59:58Z"
+          },
+          {
+            "entry_hash": "1efbf3b83f76695a9b574eb1582c5c9ef78c284a8e8960e372d5f5fd96fce62e",
+            "kind": "receipt",
+            "object": {
+              "action": {
+                "args_hash": "sha256:1c6d8aa0cccdff13941c8d9ca5cd96a0f7b330157ac6b6ccc64bd54dfa4eb102",
+                "args_public": {
+                  "submolt": "introductions",
+                  "title": "Hello from Stream Presence \u2014 new agent on the board"
+                },
+                "artifact_url": "https://www.moltbook.com/post/e9c6e164-a127-4e80-86d9-bc5fe5cdefc2",
+                "occurred_at": "2026-11-17T20:42:00Z",
+                "result_hash": null,
+                "type": "moltbook.post"
+              },
+              "issued_at": "2026-11-17T20:59:58Z",
+              "issuer": "did:key:z6MkwB88YSpduPYgbL9CPm3bnNCzgb7NxuLnvMHLNFZgkGJs",
+              "issuer_label": "muse",
+              "prev_receipt_hash": "01f820b4f143d382b3e3ae1748acbf9f06ab8d8f7d1141647cbc3f389611633b",
+              "receipt_id": "rcpt_cade45b82a32485f95c621f074bbfb0f",
+              "receipt_version": "0.1",
+              "signature": "OrMfY7A0GgNZTIURBosS_vvRhrJeYECzAz3MidNslxsac3KIxUEwkXcrF7J8_gTxdVYWCbEyNGuLSCSI7T3TBg"
+            },
+            "prev_hash": "01f820b4f143d382b3e3ae1748acbf9f06ab8d8f7d1141647cbc3f389611633b",
+            "seq": 4,
+            "ts": "2026-11-17T20:59:58Z"
+          },
+          {
+            "entry_hash": "a2fe18b2f14ac188aabb941476c769fe723f64a5941ccf8a88d2ad4f11ff3653",
+            "kind": "receipt",
+            "object": {
+              "action": {
+                "args_hash": "sha256:9e295e8c855984e8194aeb871545d7b1ff934b15c94c5f2cc0cb4403d4ac4dfb",
+                "args_public": {
+                  "kind": "agent forum founding invitation",
+                  "platform_receipt_id": "94f607cfcd4902f3bea6432678687b81",
+                  "room": "lobby/main"
+                },
+                "artifact_url": "https://swarmmemo.com/e/94f607cfcd4902f3bea6432678687b81",
+                "occurred_at": "2026-11-17T20:32:00Z",
+                "result_hash": null,
+                "type": "swarmmemo.post"
+              },
+              "issued_at": "2026-11-17T20:59:58Z",
+              "issuer": "did:key:z6MkwB88YSpduPYgbL9CPm3bnNCzgb7NxuLnvMHLNFZgkGJs",
+              "issuer_label": "muse",
+              "prev_receipt_hash": "1efbf3b83f76695a9b574eb1582c5c9ef78c284a8e8960e372d5f5fd96fce62e",
+              "receipt_id": "rcpt_6bcb52a467ce46b99da5e85cdf34a35f",
+              "receipt_version": "0.1",
+              "signature": "SvynXd0TEQvZhy4DXBC2D7AQzPP2yd7YfTWRLSHu37ak1COuCO081QeMMUdq0U75WMswcQSibfgVusz1aSGqBg"
+            },
+            "prev_hash": "1efbf3b83f76695a9b574eb1582c5c9ef78c284a8e8960e372d5f5fd96fce62e",
+            "seq": 5,
+            "ts": "2026-11-17T20:59:58Z"
+          },
+          {
+            "entry_hash": "3ddb3e80a6d4ce2dfce02964746a38de96675cde31a92dd8d2c0355a51b6ca23",
+            "kind": "receipt",
+            "object": {
+              "action": {
+                "args_hash": "sha256:423834f70c1a34dc9965f781cac571e633b5fc65542c29f9b7ac88c9276e4f36",
+                "args_public": {
+                  "head_sha": "cf7f98bd38ec92f8c1126b1419ebedf71abb1537",
+                  "pr": 2,
+                  "repo": "jbsilver96/current-nyc-events",
+                  "what": "pipeline emission PR (on-sale + demand signals)"
+                },
+                "artifact_url": "https://github.com/jbsilver96/current-nyc-events/pull/2",
+                "occurred_at": "2026-11-17T20:17:00Z",
+                "result_hash": null,
+                "type": "github.push"
+              },
+              "issued_at": "2026-11-17T20:59:58Z",
+              "issuer": "did:key:z6MkwB88YSpduPYgbL9CPm3bnNCzgb7NxuLnvMHLNFZgkGJs",
+              "issuer_label": "muse",
+              "prev_receipt_hash": "a2fe18b2f14ac188aabb941476c769fe723f64a5941ccf8a88d2ad4f11ff3653",
+              "receipt_id": "rcpt_e113cf4b15fe47f69fb6bd998e384bd5",
+              "receipt_version": "0.1",
+              "signature": "uLRh9UVeGK9vKLaAxIlFVFWlznKtvwpdwk9r2iJ245njzJz-DiUtXs3OxUYZ9kGcuvyitES5HcHIotxw44jSCQ"
+            },
+            "prev_hash": "a2fe18b2f14ac188aabb941476c769fe723f64a5941ccf8a88d2ad4f11ff3653",
+            "seq": 6,
+            "ts": "2026-11-17T20:59:58Z"
+          },
+          {
+            "entry_hash": "b4e041c0b97bbc0dbcc5bf4d91ea1335c7172f1c15d368afe7d68a27df2fd9b7",
+            "kind": "receipt",
+            "object": {
+              "action": {
+                "args_hash": "sha256:02d905d2a25687ef4568bc8f2e0d86570cc151a2a364c7df23ee5f510c6ebe9c",
+                "args_public": {
+                  "head_sha": "8d8aac1e601bc65033c0f73554ee533e0cbc924a",
+                  "pr": 35,
+                  "repo": "jbsilver96/current-app",
+                  "what": "PR #35 round-2 fix pass (Dot's 4 probes)"
+                },
+                "artifact_url": "https://github.com/jbsilver96/current-app/pull/35#issuecomment-6960185145",
+                "occurred_at": "2026-11-17T20:33:00Z",
+                "result_hash": null,
+                "type": "github.push"
+              },
+              "issued_at": "2026-11-17T20:59:58Z",
+              "issuer": "did:key:z6MkwB88YSpduPYgbL9CPm3bnNCzgb7NxuLnvMHLNFZgkGJs",
+              "issuer_label": "muse",
+              "prev_receipt_hash": "3ddb3e80a6d4ce2dfce02964746a38de96675cde31a92dd8d2c0355a51b6ca23",
+              "receipt_id": "rcpt_cd47c58de8d74f1c83290110d9ecb3a6",
+              "receipt_version": "0.1",
+              "signature": "CF8ScvtXgFkc7OM4dNMEcjLUHoyPxX8OWpIsu64q4gBN1z9gK1n6VXEVahC5YfjnGQ30j7xFylKqf2fJFm15AA"
+            },
+            "prev_hash": "3ddb3e80a6d4ce2dfce02964746a38de96675cde31a92dd8d2c0355a51b6ca23",
+            "seq": 7,
+            "ts": "2026-11-17T20:59:58Z"
+          },
+          {
+            "entry_hash": "8319b48abcce482f374dc7fb710b75ffff9d7e15472eeafec7222606a56a9a75",
+            "kind": "receipt",
+            "object": {
+              "action": {
+                "args_hash": "sha256:cbe70ae5e719feb79d3fd377d40b1cb5780830f1ebf81146c3f99bd9f397bac1",
+                "args_public": {
+                  "card_id": "SCOUT-2026-11-17-999",
+                  "title": "A coding agent improved itself almost as much as the best self-improving systems without ever testing its new versions on the real tasks \u2014 it just merged the good ideas from its own drafts"
+                },
+                "occurred_at": "2026-11-17T14:44:00Z",
+                "result_hash": "sha256:eb6fd7d5b51a1b36e0163249e2a1ee20db4d2f6007c0cbd50498cc6c5d419d94",
+                "type": "scout.card_filed"
+              },
+              "issued_at": "2026-11-17T20:59:58Z",
+              "issuer": "did:key:z6MkhwynbbvzuGj4QpUtAGNJmu9jc4nEonAfwcyZUy5FCyFb",
+              "issuer_label": "scout",
+              "prev_receipt_hash": "GENESIS",
+              "receipt_id": "rcpt_0ba6b7e64cb94c66a454ee99af4f6b3d",
+              "receipt_version": "0.1",
+              "signature": "fS2_TfrG_z27VYduUOYLmJNQw2YHp_ACqEWfhzjCJkdb0OlBmTeTEYyELWqzMVDzVYkFSPUCt2mO5gfcvhbABg"
+            },
+            "prev_hash": "b4e041c0b97bbc0dbcc5bf4d91ea1335c7172f1c15d368afe7d68a27df2fd9b7",
+            "seq": 8,
+            "ts": "2026-11-17T20:59:58Z"
+          }
+        ],
+        "registries": "suite"
+      },
+      "kind": "verify",
+      "mutation": {
+        "entry_hash_recomputed": true,
+        "field": "action.args_public.card_id",
+        "mutated": "SCOUT-2026-11-17-999",
+        "original": "SCOUT-2026-11-17-1"
+      },
+      "receipt": {
+        "action": {
+          "args_hash": "sha256:cbe70ae5e719feb79d3fd377d40b1cb5780830f1ebf81146c3f99bd9f397bac1",
+          "args_public": {
+            "card_id": "SCOUT-2026-11-17-999",
+            "title": "A coding agent improved itself almost as much as the best self-improving systems without ever testing its new versions on the real tasks \u2014 it just merged the good ideas from its own drafts"
+          },
+          "occurred_at": "2026-11-17T14:44:00Z",
+          "result_hash": "sha256:eb6fd7d5b51a1b36e0163249e2a1ee20db4d2f6007c0cbd50498cc6c5d419d94",
+          "type": "scout.card_filed"
+        },
+        "issued_at": "2026-11-17T20:59:58Z",
+        "issuer": "did:key:z6MkhwynbbvzuGj4QpUtAGNJmu9jc4nEonAfwcyZUy5FCyFb",
+        "issuer_label": "scout",
+        "prev_receipt_hash": "GENESIS",
+        "receipt_id": "rcpt_0ba6b7e64cb94c66a454ee99af4f6b3d",
+        "receipt_version": "0.1",
+        "signature": "fS2_TfrG_z27VYduUOYLmJNQw2YHp_ACqEWfhzjCJkdb0OlBmTeTEYyELWqzMVDzVYkFSPUCt2mO5gfcvhbABg"
+      },
+      "synthetic": true,
+      "target_receipt_id": "rcpt_0ba6b7e64cb94c66a454ee99af4f6b3d",
+      "why": "The hardest tamper: the entry hash was recomputed, so the log-chain check passes and only the issuer signature \u2014 Ed25519 over the JCS-canonical receipt \u2014 can catch it. Expected INVALID with exactly one failing check: issuer signature. (A lazier tamper that leaves the entry hash stale is caught one check earlier, by 'log chain intact'.)"
+    },
+    {
+      "description": "SYNTHETIC arithmetic vector \u2014 no receipt; the settlement rule applied to gross 0.007 USDC.",
+      "expected": {
+        "fee_usdc": "0.0005",
+        "net_usdc": "0.0065"
+      },
+      "id": "settlement-floor-below",
+      "inputs": {
+        "gross_usdc": "0.007"
+      },
+      "kind": "settlement",
+      "settlement": {
+        "branch": "floor",
+        "rule": "fee = max(quantize(0.05 * gross, 6dp, ROUND_HALF_UP), 0.0005); net = gross - fee; Decimal arithmetic, amounts are decimal strings"
+      },
+      "synthetic": true,
+      "why": "Below the boundary: 5% of 0.007 is 0.00035, under the 0.0005 floor, so the floor sets the fee. An implementation without the floor returns fee 0.00035 and net 0.00665 \u2014 both wrong."
+    },
+    {
+      "description": "SYNTHETIC arithmetic vector \u2014 no receipt; the settlement rule applied to gross 0.123457 USDC.",
+      "expected": {
+        "fee_usdc": "0.006173",
+        "net_usdc": "0.117284"
+      },
+      "id": "settlement-rounding",
+      "inputs": {
+        "gross_usdc": "0.123457"
+      },
+      "kind": "settlement",
+      "settlement": {
+        "branch": "rounding",
+        "rule": "fee = max(quantize(0.05 * gross, 6dp, ROUND_HALF_UP), 0.0005); net = gross - fee; Decimal arithmetic, amounts are decimal strings"
+      },
+      "synthetic": true,
+      "why": "The rounding edge: 5% of 0.123457 is 0.00617285 \u2014 seven decimal places. Quantized to 6dp with ROUND_HALF_UP the fee is 0.006173 and net = 0.123457 - 0.006173 = 0.117284. Float arithmetic or banker's rounding can land a micro-unit off; the format's amounts are Decimal strings at 6dp precisely so this recompute is exact."
+    },
+    {
+      "description": "SYNTHETIC fixture \u2014 two receipts in one small log, signed by two fresh keys created for this suite: one registered with class fleet, one registered as external_probationary with the standard probationary daily cap of 20. Neither key exists in any real registry.",
+      "id": "issuer-tier-fleet-vs-probationary",
+      "inputs": {
+        "at_time": "2026-11-25T17:56:04Z",
+        "issuers": {
+          "issuers": [
+            {
+              "class": "fleet",
+              "daily_cap": null,
+              "did": "did:key:z6MkjERizF8jSLe89ENBMNDa9ZLuQzN7teF9uf5S6rWZQyrq",
+              "display_name": "Vector Fleet (synthetic)",
+              "kind": "fleet-agent",
+              "label": "vector-fleet",
+              "registered_at": "2026-11-25T17:56:04Z",
+              "status": "active"
+            },
+            {
+              "class": "external_probationary",
+              "daily_cap": 20,
+              "did": "did:key:z6Mkw1iYafnaDvWqEXLKizUy2rqwAPtM1d6zNd8NWd5rTTwS",
+              "display_name": "Vector Probationary (synthetic)",
+              "label": "vector-probationary",
+              "registered_at": "2026-11-25T17:56:05Z",
+              "status": "active"
+            }
+          ],
+          "issuers_version": "0.1"
+        },
+        "log_entries": [
+          {
+            "entry_hash": "14dc591a3e041d5af20f815f4ea38c996fc3c64d0fdd8be9ee1e5354130ea045",
+            "kind": "receipt",
+            "object": {
+              "action": {
+                "args_hash": "sha256:8838ae84f5299f841ef9436d07902f8e76ab5bff28acbb14b9a3484871269410",
+                "args_public": {
+                  "case": "issuer-tier",
+                  "note": "issued by the fixture fleet issuer"
+                },
+                "result_hash": null,
+                "type": "vector.test"
+              },
+              "issued_at": "2026-11-25T17:56:04Z",
+              "issuer": "did:key:z6MkjERizF8jSLe89ENBMNDa9ZLuQzN7teF9uf5S6rWZQyrq",
+              "issuer_label": "vector-fleet",
+              "prev_receipt_hash": "GENESIS",
+              "receipt_id": "rcpt_a4be3f29581d4c1ebfee9fda34347599",
+              "receipt_version": "0.1",
+              "signature": "njC6ryIDb4IfRCyf1_KtW-U8NdzyJZBDyA4ea0IVG7_RRRpS0SFJGWn2lh_FfEe9QCn31bhIARTwYoyL8LkwCw"
+            },
+            "prev_hash": "GENESIS",
+            "seq": 0,
+            "ts": "2026-11-25T17:56:05Z"
+          },
+          {
+            "entry_hash": "7330134d4a4c49c8cbcf6699642d67c17065da39a463317767dab22124c14136",
+            "issuer_class": "external_probationary",
+            "kind": "receipt",
+            "object": {
+              "action": {
+                "args_hash": "sha256:81888ea47304f30080effebd39188ebfe45a388acaef4e7f90c177e525f3431c",
+                "args_public": {
+                  "case": "issuer-tier",
+                  "note": "issued by the fixture probationary issuer"
+                },
+                "result_hash": null,
+                "type": "vector.test"
+              },
+              "issued_at": "2026-11-25T17:56:04Z",
+              "issuer": "did:key:z6Mkw1iYafnaDvWqEXLKizUy2rqwAPtM1d6zNd8NWd5rTTwS",
+              "issuer_label": "vector-probationary",
+              "prev_receipt_hash": "GENESIS",
+              "receipt_id": "rcpt_2feeecfa4b144ec3a622b07c3a82719c",
+              "receipt_version": "0.1",
+              "signature": "uL63SvDmhtHKstet5B0YXEm5g6YE35sav0MCb9M3aWcPEgQ804pfHi0FIHgYiq9R9BnZg3L5XNN_ze-Vkd8iCg"
+            },
+            "prev_hash": "14dc591a3e041d5af20f815f4ea38c996fc3c64d0fdd8be9ee1e5354130ea045",
+            "seq": 1,
+            "ts": "2026-11-25T17:56:05Z"
+          }
+        ],
+        "registry": {
+          "issuers": [],
+          "registry_version": "0.1"
+        }
+      },
+      "kind": "verify-pair",
+      "synthetic": true,
+      "targets": [
+        {
+          "expected": {
+            "failing_checks": [],
+            "issuer_class": "fleet",
+            "verdict": "VALID"
+          },
+          "receipt_id": "rcpt_a4be3f29581d4c1ebfee9fda34347599",
+          "role": "fleet"
+        },
+        {
+          "expected": {
+            "failing_checks": [],
+            "issuer_class": "external_probationary",
+            "verdict": "VALID"
+          },
+          "receipt_id": "rcpt_2feeecfa4b144ec3a622b07c3a82719c",
+          "role": "external_probationary"
+        }
+      ],
+      "why": "Both receipts are cryptographically identical in shape and both verify VALID \u2014 what the format distinguishes is standing: verify_receipt reports issuer_class fleet for the first and external_probationary (with its current status) for the second. A conforming verifier must surface the class, not collapse both into 'valid'. Probationary issuance is additionally cap-bound at ingestion (20/day) \u2014 a term the registry entry carries."
+    },
+    {
+      "description": "Standing of musescout5 \u2014 the real probationary external issuer \u2014 recomputed from the published registries and log.",
+      "expected": {
+        "class": "external_probationary",
+        "daily_cap": 20,
+        "in_good_standing": true,
+        "label": "musescout5",
+        "receipt_count": 0,
+        "registered": true,
+        "revoked": false,
+        "status": "active"
+      },
+      "id": "issuer-standing-probationary-active",
+      "inputs": {
+        "did": "did:key:z6MknhYkGY3ZDYs1isJLSQjBM7bNmkprEVtxq3Z2KFRNVGK8",
+        "log": "https://streampresence.github.io/receipts/receipts.jsonl",
+        "registries": "suite"
+      },
+      "kind": "standing",
+      "synthetic": false,
+      "why": "The probationary tier, live: registered, class external_probationary, status active, daily cap 20, not revoked, in good standing \u2014 and, honestly, receipt_count 0: registration is not activity. A standing check must report the cap and the zero."
+    },
+    {
+      "description": "The published registry entry for nyna \u2014 a probationary registration that never completed key registration.",
+      "expected": {
+        "can_issue": false,
+        "class": "external_probationary",
+        "daily_cap": 20,
+        "did": null,
+        "entry_present": true,
+        "status": "pending_key"
+      },
+      "id": "issuer-standing-pending-key",
+      "inputs": {
+        "label": "nyna",
+        "registries": "suite"
+      },
+      "kind": "standing",
+      "synthetic": false,
+      "why": "A registration without a did:key is a name on a list, not an issuer: status pending_key, did null. Nothing signed by this registrant can be appended or verified as registered, because there is no key on file to verify against. The registry says so openly instead of the entry silently not existing."
+    },
+    {
+      "description": "SYNTHETIC did \u2014 a fresh did:key generated for this suite and registered nowhere \u2014 checked against the real published registries and log.",
+      "expected": {
+        "class": null,
+        "daily_cap": null,
+        "in_good_standing": false,
+        "receipt_count": 0,
+        "registered": false,
+        "revoked": false,
+        "status": null
+      },
+      "id": "issuer-standing-unregistered",
+      "inputs": {
+        "did": "did:key:z6Mki3y7w3Sy72AuTdLWj6dNVeQvFX15eDsnojDA7Dz4te98",
+        "log": "https://streampresence.github.io/receipts/receipts.jsonl",
+        "registries": "suite"
+      },
+      "kind": "standing",
+      "synthetic": true,
+      "why": "The negative control for standing: a valid Ed25519 key proves nothing about standing. Expected: registered = false, in_good_standing = false, receipt_count = 0. A verifier that treats 'has a key' as 'is an issuer' fails this case."
+    }
+  ],
+  "explainer": "conformance-vectors.md",
+  "format_under_test": "Stream Presence receipts \u2014 SPEC.md (v0.1 core with v0.2 failure/dispute and v0.3 countersignature extensions)",
+  "generated_at": "2026-11-25T17:56:04Z",
+  "how_to_run": {
+    "pass_meaning": "A pass means your verifier reaches the same verdicts as the reference recompute on the format's decision points \u2014 including the cases whose correct answer is INVALID or 'valid but unclosed'. It asserts nothing about the wisdom of the actions recorded (see SPEC.md, 'A verification asserts \u2014 and does not assert').",
+    "settlement_cases": "Apply settlement_rule to inputs.gross_usdc (or the payout receipt's args_public.gross_usdc) with Decimal arithmetic and compare fee/net exactly as strings at 6dp.",
+    "standing_cases": "Recompute standing from the registries + log (reference: a2a.issuer_standing) and compare the expected fields.",
+    "verify_cases": "Write the case's log slice (lines 0..through_seq of the published log, or the embedded log_entries) as JSONL, the registries as issuers.json/registry.json, then run the reference recompute: core.verify_receipt(target_receipt_id, log_path, issuers_path, registry_path) with at_time pinned to the case's at_time. Compare verdict, issuer_class, the set of failing check names, and the countersignature/dispute states. Independent implementations should recompute per SPEC.md 'Verifying the operator' and compare the same fields."
+  },
+  "published_log": {
+    "chain_head_at_generation": "ec7c5f1ed0ea81d752d689a3a3df6b78d9ba9c36685f5ef344a22ff65c2524cc",
+    "entries_at_generation": 248,
+    "url": "https://streampresence.github.io/receipts/receipts.jsonl"
+  },
+  "registries": {
+    "issuers": {
+      "issuers": [
+        {
+          "class": "fleet",
+          "daily_cap": null,
+          "did": "did:key:z6MkwB88YSpduPYgbL9CPm3bnNCzgb7NxuLnvMHLNFZgkGJs",
+          "display_name": "muse",
+          "kind": "fleet-agent",
+          "label": "muse",
+          "registered_at": "2026-11-17T20:59:34Z",
+          "status": "active"
+        },
+        {
+          "class": "fleet",
+          "daily_cap": null,
+          "did": "did:key:z6MkhwynbbvzuGj4QpUtAGNJmu9jc4nEonAfwcyZUy5FCyFb",
+          "display_name": "scout",
+          "kind": "fleet-agent",
+          "label": "scout",
+          "registered_at": "2026-11-17T20:59:34Z",
+          "status": "active"
+        },
+        {
+          "class": "fleet",
+          "daily_cap": null,
+          "did": "did:key:z6MkpN6uTeutxx5QJb5GXeJERFXimj3RzUc2hQKnfvMCgHuE",
+          "display_name": "researcher",
+          "kind": "fleet-agent",
+          "label": "researcher",
+          "registered_at": "2026-11-17T20:59:34Z",
+          "status": "active"
+        },
+        {
+          "class": "fleet",
+          "daily_cap": null,
+          "did": "did:key:z6Mkv6jZFetnP4pm2VAtsHgqMtSHkeWx2FXAKeJfVnQTBN7i",
+          "display_name": "arbiter",
+          "kind": "fleet-agent",
+          "label": "arbiter",
+          "registered_at": "2026-11-17T20:59:34Z",
+          "status": "active"
+        },
+        {
+          "class": "fleet",
+          "daily_cap": null,
+          "did": "did:key:z6Mkfytzysj75EBsRAkDPom1kWDbTJW3PRgEuxmRRQ6UPgkw",
+          "display_name": "johnny",
+          "kind": "approver",
+          "label": "johnny",
+          "registered_at": "2026-11-17T20:59:34Z",
+          "status": "active"
+        },
+        {
+          "class": "external_probationary",
+          "daily_cap": 20,
+          "did": null,
+          "display_name": "nyna",
+          "label": "nyna",
+          "registered_at": "2026-11-17T23:39:34Z",
+          "status": "pending_key"
+        },
+        {
+          "class": "external_probationary",
+          "daily_cap": 20,
+          "did": "did:key:z6MknhYkGY3ZDYs1isJLSQjBM7bNmkprEVtxq3Z2KFRNVGK8",
+          "display_name": "musescout5",
+          "key_registered_at": "2026-11-20T01:42:25Z",
+          "label": "musescout5",
+          "registered_at": "2026-11-19T15:19:23Z",
+          "status": "active"
+        }
+      ],
+      "issuers_version": "0.1"
+    },
+    "note": "The published registries, embedded so the suite is self-contained. Cases whose inputs say \"registries\": \"suite\" use these two objects, written to issuers.json / registry.json.",
+    "registry": {
+      "issuers": [
+        {
+          "did": "did:key:z6MkwB88YSpduPYgbL9CPm3bnNCzgb7NxuLnvMHLNFZgkGJs",
+          "first_seen": "2026-11-17T20:59:34Z",
+          "kind": "fleet-agent",
+          "label": "muse",
+          "public_key_b64u": "-HRvioBDSPpAE3n0UYBiEI20rbS56JG7gAnYfhM3zlA",
+          "status": "active"
+        },
+        {
+          "did": "did:key:z6MkhwynbbvzuGj4QpUtAGNJmu9jc4nEonAfwcyZUy5FCyFb",
+          "first_seen": "2026-11-17T20:59:34Z",
+          "kind": "fleet-agent",
+          "label": "scout",
+          "public_key_b64u": "M-6FS1q7hA8eiDXBvGdrKjYRCMCk-PoLdZqxzP0LNcY",
+          "status": "active"
+        },
+        {
+          "did": "did:key:z6MkpN6uTeutxx5QJb5GXeJERFXimj3RzUc2hQKnfvMCgHuE",
+          "first_seen": "2026-11-17T20:59:34Z",
+          "kind": "fleet-agent",
+          "label": "researcher",
+          "public_key_b64u": "k0KhYD2ocRzecQI6FMdbqKgQrdCPDo1-mQQXmOab4Z0",
+          "status": "active"
+        },
+        {
+          "did": "did:key:z6Mkv6jZFetnP4pm2VAtsHgqMtSHkeWx2FXAKeJfVnQTBN7i",
+          "first_seen": "2026-11-17T20:59:34Z",
+          "kind": "fleet-agent",
+          "label": "arbiter",
+          "public_key_b64u": "6HjmrdD528uC9ESXkIFJWFTFs_hGbLmrWRIGiu3sc0k",
+          "status": "active"
+        },
+        {
+          "did": "did:key:z6Mkfytzysj75EBsRAkDPom1kWDbTJW3PRgEuxmRRQ6UPgkw",
+          "first_seen": "2026-11-17T20:59:34Z",
+          "kind": "approver",
+          "label": "johnny",
+          "public_key_b64u": "FrTld2kli7J0IkTYoIU7DUxDfOITareDgZ-Z3U7n3nA",
+          "status": "active"
+        }
+      ],
+      "registry_version": "0.1"
+    }
+  },
+  "settlement_rule": "fee = max(quantize(0.05 * gross, 6dp, ROUND_HALF_UP), 0.0005); net = gross - fee. Decimal arithmetic only; amounts are decimal strings (stats.py conventions).",
+  "spec": "SPEC.md",
+  "suite": "stream-presence-receipts-conformance",
+  "version": "1.0"
+}
