@@ -13,7 +13,7 @@
       },
       "id": "valid-plain-scout-card",
       "inputs": {
-        "at_time": "2026-11-25T17:56:04Z",
+        "at_time": "2026-11-26T22:20:55Z",
         "log_slice": {
           "from_seq": 0,
           "slice_head_entry_hash": "abdb530d3e496419436c60c4d01104185bc8eb5f01eb448850a19a08156a204f",
@@ -61,7 +61,7 @@
       },
       "id": "invalid-c6-approval-scope",
       "inputs": {
-        "at_time": "2026-11-25T17:56:04Z",
+        "at_time": "2026-11-26T22:20:55Z",
         "log_slice": {
           "from_seq": 0,
           "slice_head_entry_hash": "d79474e5b0faa6d1f3517b96577b4189e6f563543d27fdb2e780ccce95014b7d",
@@ -106,7 +106,7 @@
       },
       "id": "valid-c6-supersession",
       "inputs": {
-        "at_time": "2026-11-25T17:56:04Z",
+        "at_time": "2026-11-26T22:20:55Z",
         "log_slice": {
           "from_seq": 0,
           "slice_head_entry_hash": "d79474e5b0faa6d1f3517b96577b4189e6f563543d27fdb2e780ccce95014b7d",
@@ -151,7 +151,7 @@
       },
       "id": "countersigned-present",
       "inputs": {
-        "at_time": "2026-11-25T17:56:04Z",
+        "at_time": "2026-11-26T22:20:55Z",
         "log_slice": {
           "from_seq": 0,
           "slice_head_entry_hash": "5e87db1b4b2f9fe67f70ae0ea603a75667c507e5b2b23a31d152c6cece4b85ad",
@@ -226,7 +226,7 @@
       },
       "id": "countersigned-absent",
       "inputs": {
-        "at_time": "2026-11-25T17:56:04Z",
+        "at_time": "2026-11-26T22:20:55Z",
         "log_slice": {
           "from_seq": 0,
           "slice_head_entry_hash": "e3f52d74e9d5f4fbb09c84d678e6058a000b80bee3f506d934c35e2dc6c7bdda",
@@ -301,7 +301,7 @@
       },
       "id": "settlement-five-percent",
       "inputs": {
-        "at_time": "2026-11-25T17:56:04Z",
+        "at_time": "2026-11-26T22:20:55Z",
         "log_slice": {
           "from_seq": 0,
           "slice_head_entry_hash": "d030646ad37ed67d0002433582d7572ddee99071bca81dc596163522380677a7",
@@ -364,7 +364,7 @@
       },
       "id": "settlement-floor-boundary",
       "inputs": {
-        "at_time": "2026-11-25T17:56:04Z",
+        "at_time": "2026-11-26T22:20:55Z",
         "log_slice": {
           "from_seq": 0,
           "slice_head_entry_hash": "598b9088d9610e02bea4e6256589dc150f737353fc5aaa207695b2ecc684eb3c",
@@ -429,7 +429,7 @@
       },
       "id": "tampered-content",
       "inputs": {
-        "at_time": "2026-11-25T17:56:04Z",
+        "at_time": "2026-11-26T22:20:55Z",
         "log_entries": [
           {
             "entry_hash": "e27c510444646ddaa5796d678b7af48f2871dc9a01aac8fa07c12af46b04a39c",
@@ -758,26 +758,26 @@
       "description": "SYNTHETIC fixture \u2014 two receipts in one small log, signed by two fresh keys created for this suite: one registered with class fleet, one registered as external_probationary with the standard probationary daily cap of 20. Neither key exists in any real registry.",
       "id": "issuer-tier-fleet-vs-probationary",
       "inputs": {
-        "at_time": "2026-11-25T17:56:04Z",
+        "at_time": "2026-11-26T22:20:55Z",
         "issuers": {
           "issuers": [
             {
               "class": "fleet",
               "daily_cap": null,
-              "did": "did:key:z6MkjERizF8jSLe89ENBMNDa9ZLuQzN7teF9uf5S6rWZQyrq",
+              "did": "did:key:z6MksZtVn4Q52SDKxLz6zKGspTbLnGDLq59y1jGaLRQEqkoV",
               "display_name": "Vector Fleet (synthetic)",
               "kind": "fleet-agent",
               "label": "vector-fleet",
-              "registered_at": "2026-11-25T17:56:04Z",
+              "registered_at": "2026-11-26T22:20:55Z",
               "status": "active"
             },
             {
               "class": "external_probationary",
               "daily_cap": 20,
-              "did": "did:key:z6Mkw1iYafnaDvWqEXLKizUy2rqwAPtM1d6zNd8NWd5rTTwS",
+              "did": "did:key:z6MksqLmWpa7uDQR2wirmiobkPGt4TPpkQP5Gf7V3W7uLZKp",
               "display_name": "Vector Probationary (synthetic)",
               "label": "vector-probationary",
-              "registered_at": "2026-11-25T17:56:05Z",
+              "registered_at": "2026-11-26T22:20:56Z",
               "status": "active"
             }
           ],
@@ -785,7 +785,7 @@
         },
         "log_entries": [
           {
-            "entry_hash": "14dc591a3e041d5af20f815f4ea38c996fc3c64d0fdd8be9ee1e5354130ea045",
+            "entry_hash": "de9268e740b38151b2ce9b553efa35e3e4893d98fcb8b40d8e6ea9d8cce2e8ee",
             "kind": "receipt",
             "object": {
               "action": {
@@ -797,20 +797,20 @@
                 "result_hash": null,
                 "type": "vector.test"
               },
-              "issued_at": "2026-11-25T17:56:04Z",
-              "issuer": "did:key:z6MkjERizF8jSLe89ENBMNDa9ZLuQzN7teF9uf5S6rWZQyrq",
+              "issued_at": "2026-11-26T22:20:55Z",
+              "issuer": "did:key:z6MksZtVn4Q52SDKxLz6zKGspTbLnGDLq59y1jGaLRQEqkoV",
               "issuer_label": "vector-fleet",
               "prev_receipt_hash": "GENESIS",
-              "receipt_id": "rcpt_a4be3f29581d4c1ebfee9fda34347599",
+              "receipt_id": "rcpt_5061e7021ffe46068566d69180f604d8",
               "receipt_version": "0.1",
-              "signature": "njC6ryIDb4IfRCyf1_KtW-U8NdzyJZBDyA4ea0IVG7_RRRpS0SFJGWn2lh_FfEe9QCn31bhIARTwYoyL8LkwCw"
+              "signature": "xcRkCcwH7ClTnBaQ3H9rX1K-h4ZAg-tXcA82G5negNvgvOBvx9Dy6uTBSpdqBBfTkt7ZofqmDQ19UhRWjnOJDQ"
             },
             "prev_hash": "GENESIS",
             "seq": 0,
-            "ts": "2026-11-25T17:56:05Z"
+            "ts": "2026-11-26T22:20:56Z"
           },
           {
-            "entry_hash": "7330134d4a4c49c8cbcf6699642d67c17065da39a463317767dab22124c14136",
+            "entry_hash": "8c65cd0cbd1e2b01899ef25fac126768925ed2c8b3e303595f8af79e4c0bd448",
             "issuer_class": "external_probationary",
             "kind": "receipt",
             "object": {
@@ -823,17 +823,17 @@
                 "result_hash": null,
                 "type": "vector.test"
               },
-              "issued_at": "2026-11-25T17:56:04Z",
-              "issuer": "did:key:z6Mkw1iYafnaDvWqEXLKizUy2rqwAPtM1d6zNd8NWd5rTTwS",
+              "issued_at": "2026-11-26T22:20:55Z",
+              "issuer": "did:key:z6MksqLmWpa7uDQR2wirmiobkPGt4TPpkQP5Gf7V3W7uLZKp",
               "issuer_label": "vector-probationary",
               "prev_receipt_hash": "GENESIS",
-              "receipt_id": "rcpt_2feeecfa4b144ec3a622b07c3a82719c",
+              "receipt_id": "rcpt_ac3630420d144158991ca5962f18fe8a",
               "receipt_version": "0.1",
-              "signature": "uL63SvDmhtHKstet5B0YXEm5g6YE35sav0MCb9M3aWcPEgQ804pfHi0FIHgYiq9R9BnZg3L5XNN_ze-Vkd8iCg"
+              "signature": "_nRaVu9c-Pgi77k1jmmrZuT-WG4N06fv9f6H43kOGpqKGtnffXrN8kWNXtmoNItDzavHkGToQigEe5rO-jzODQ"
             },
-            "prev_hash": "14dc591a3e041d5af20f815f4ea38c996fc3c64d0fdd8be9ee1e5354130ea045",
+            "prev_hash": "de9268e740b38151b2ce9b553efa35e3e4893d98fcb8b40d8e6ea9d8cce2e8ee",
             "seq": 1,
-            "ts": "2026-11-25T17:56:05Z"
+            "ts": "2026-11-26T22:20:56Z"
           }
         ],
         "registry": {
@@ -850,7 +850,7 @@
             "issuer_class": "fleet",
             "verdict": "VALID"
           },
-          "receipt_id": "rcpt_a4be3f29581d4c1ebfee9fda34347599",
+          "receipt_id": "rcpt_5061e7021ffe46068566d69180f604d8",
           "role": "fleet"
         },
         {
@@ -859,11 +859,271 @@
             "issuer_class": "external_probationary",
             "verdict": "VALID"
           },
-          "receipt_id": "rcpt_2feeecfa4b144ec3a622b07c3a82719c",
+          "receipt_id": "rcpt_ac3630420d144158991ca5962f18fe8a",
           "role": "external_probationary"
         }
       ],
       "why": "Both receipts are cryptographically identical in shape and both verify VALID \u2014 what the format distinguishes is standing: verify_receipt reports issuer_class fleet for the first and external_probationary (with its current status) for the second. A conforming verifier must surface the class, not collapse both into 'valid'. Probationary issuance is additionally cap-bound at ingestion (20/day) \u2014 a term the registry entry carries."
+    },
+    {
+      "description": "SYNTHETIC fixture \u2014 a receipt in a small fixture log, with a signed dispute chained after it by a second registered fixture issuer (claim: the net figure is wrong; disputed field action.args_public.net_usdc). Built for this suite with fresh keys; never in the real log.",
+      "expected": {
+        "approval": null,
+        "countersignature_state": null,
+        "countersigned": false,
+        "dispute_state": "DISPUTED",
+        "failing_checks": [],
+        "issuer_class": "fleet",
+        "verdict": "VALID"
+      },
+      "id": "dispute-open-marks-receipt",
+      "inputs": {
+        "at_time": "2026-11-26T22:20:55Z",
+        "issuers": {
+          "issuers": [
+            {
+              "class": "fleet",
+              "daily_cap": null,
+              "did": "did:key:z6Mkj2kn6EauWqZcQ1rmshsLjEMUGdqAruxJfVKa6XBroSTi",
+              "display_name": "Vector Dispute Issuer (synthetic)",
+              "kind": "fleet-agent",
+              "label": "vector-dispute-issuer",
+              "registered_at": "2026-11-26T22:20:55Z",
+              "status": "active"
+            },
+            {
+              "class": "fleet",
+              "daily_cap": null,
+              "did": "did:key:z6Mkhi59o1cGH3UfWP31wcRE5YkS88pbLNAph43moipa7zbU",
+              "display_name": "Vector Disputer (synthetic)",
+              "kind": "fleet-agent",
+              "label": "vector-disputer",
+              "registered_at": "2026-11-26T22:20:55Z",
+              "status": "active"
+            }
+          ],
+          "issuers_version": "0.1"
+        },
+        "log_entries": [
+          {
+            "entry_hash": "4afa8f7538b6c58e0405f20bda61583b9a21da3fefb1b75ee917bb5d34926f41",
+            "kind": "receipt",
+            "object": {
+              "action": {
+                "args_hash": "sha256:140943b5567ddac35245ff03afbf6a55b2efe744c637e5626dd4b79152a08097",
+                "args_public": {
+                  "case": "dispute",
+                  "fee_usdc": "0.0025",
+                  "gross_usdc": "0.05",
+                  "net_usdc": "0.0475",
+                  "note": "synthetic receipt the dispute cases disagree with"
+                },
+                "result_hash": null,
+                "type": "vector.test"
+              },
+              "issued_at": "2026-11-26T22:20:55Z",
+              "issuer": "did:key:z6Mkj2kn6EauWqZcQ1rmshsLjEMUGdqAruxJfVKa6XBroSTi",
+              "issuer_label": "vector-dispute-issuer",
+              "prev_receipt_hash": "GENESIS",
+              "receipt_id": "rcpt_11acd98730bd489395c1da2777b6342f",
+              "receipt_version": "0.1",
+              "signature": "9qCXjYsprMI-RqpOf7qhuPUan_ff4efUHCZ9T_JgNtd2kVkjE3_YwUuGC6kV5UaF11Q3j9YPlue5qnOKZ5vuBw"
+            },
+            "prev_hash": "GENESIS",
+            "seq": 0,
+            "ts": "2026-11-26T22:20:56Z"
+          },
+          {
+            "entry_hash": "86a72d8fa41f3139a698e7504573b44e8c2613907c3c7f8c84c24402d9e0468c",
+            "kind": "dispute",
+            "object": {
+              "claim": "The net figure is wrong: the fee was taken twice.",
+              "dispute_id": "disp_dfb82656647b4e42b7fe72c7a2f2631a",
+              "dispute_version": "0.2",
+              "disputed_field": "action.args_public.net_usdc",
+              "disputer": "did:key:z6Mkhi59o1cGH3UfWP31wcRE5YkS88pbLNAph43moipa7zbU",
+              "disputer_label": "vector-disputer",
+              "evidence": "synthetic fixture evidence \u2014 recompute shows 0.05 - 0.0025 = 0.0475, not 0.045",
+              "filed_at": "2026-11-26T22:20:56Z",
+              "signature": "aXJJ8VfV83pokXzcNBInHiIM8ySSQWRzJvPfOTzVBF9XmfTlap2r_t3jyTBSsbomZXPatJYxkOLP8VJRjQU-CQ",
+              "target_receipt_id": "rcpt_11acd98730bd489395c1da2777b6342f",
+              "type": "dispute"
+            },
+            "prev_hash": "4afa8f7538b6c58e0405f20bda61583b9a21da3fefb1b75ee917bb5d34926f41",
+            "seq": 1,
+            "ts": "2026-11-26T22:20:56Z"
+          }
+        ],
+        "registry": {
+          "issuers": [],
+          "registry_version": "0.1"
+        }
+      },
+      "kind": "verify",
+      "receipt": {
+        "action": {
+          "args_hash": "sha256:140943b5567ddac35245ff03afbf6a55b2efe744c637e5626dd4b79152a08097",
+          "args_public": {
+            "case": "dispute",
+            "fee_usdc": "0.0025",
+            "gross_usdc": "0.05",
+            "net_usdc": "0.0475",
+            "note": "synthetic receipt the dispute cases disagree with"
+          },
+          "result_hash": null,
+          "type": "vector.test"
+        },
+        "issued_at": "2026-11-26T22:20:55Z",
+        "issuer": "did:key:z6Mkj2kn6EauWqZcQ1rmshsLjEMUGdqAruxJfVKa6XBroSTi",
+        "issuer_label": "vector-dispute-issuer",
+        "prev_receipt_hash": "GENESIS",
+        "receipt_id": "rcpt_11acd98730bd489395c1da2777b6342f",
+        "receipt_version": "0.1",
+        "signature": "9qCXjYsprMI-RqpOf7qhuPUan_ff4efUHCZ9T_JgNtd2kVkjE3_YwUuGC6kV5UaF11Q3j9YPlue5qnOKZ5vuBw"
+      },
+      "synthetic": true,
+      "target_receipt_id": "rcpt_11acd98730bd489395c1da2777b6342f",
+      "why": "The v0.2 disagreement route, exercised: a dispute is a signed counter-claim in the same log. It never edits the target receipt and never changes its verdict \u2014 the receipt still verifies VALID \u2014 but the verifier must surface dispute_state = DISPUTED so a stranger sees the disagreement. Before suite v1.1 every case expected dispute_state null, which was consistent with a disputeless log but left this decision point untested."
+    },
+    {
+      "description": "SYNTHETIC fixture \u2014 the same fixture log as dispute-open-marks-receipt, one entry later: the target receipt's issuer has appended a signed dispute_resolution (decision dispute_rejected, with reason).",
+      "expected": {
+        "approval": null,
+        "countersignature_state": null,
+        "countersigned": false,
+        "dispute_state": "DISPUTED \u2014 RESOLVED",
+        "failing_checks": [],
+        "issuer_class": "fleet",
+        "verdict": "VALID"
+      },
+      "id": "dispute-resolved-state",
+      "inputs": {
+        "at_time": "2026-11-26T22:20:55Z",
+        "issuers": {
+          "issuers": [
+            {
+              "class": "fleet",
+              "daily_cap": null,
+              "did": "did:key:z6Mkj2kn6EauWqZcQ1rmshsLjEMUGdqAruxJfVKa6XBroSTi",
+              "display_name": "Vector Dispute Issuer (synthetic)",
+              "kind": "fleet-agent",
+              "label": "vector-dispute-issuer",
+              "registered_at": "2026-11-26T22:20:55Z",
+              "status": "active"
+            },
+            {
+              "class": "fleet",
+              "daily_cap": null,
+              "did": "did:key:z6Mkhi59o1cGH3UfWP31wcRE5YkS88pbLNAph43moipa7zbU",
+              "display_name": "Vector Disputer (synthetic)",
+              "kind": "fleet-agent",
+              "label": "vector-disputer",
+              "registered_at": "2026-11-26T22:20:55Z",
+              "status": "active"
+            }
+          ],
+          "issuers_version": "0.1"
+        },
+        "log_entries": [
+          {
+            "entry_hash": "4afa8f7538b6c58e0405f20bda61583b9a21da3fefb1b75ee917bb5d34926f41",
+            "kind": "receipt",
+            "object": {
+              "action": {
+                "args_hash": "sha256:140943b5567ddac35245ff03afbf6a55b2efe744c637e5626dd4b79152a08097",
+                "args_public": {
+                  "case": "dispute",
+                  "fee_usdc": "0.0025",
+                  "gross_usdc": "0.05",
+                  "net_usdc": "0.0475",
+                  "note": "synthetic receipt the dispute cases disagree with"
+                },
+                "result_hash": null,
+                "type": "vector.test"
+              },
+              "issued_at": "2026-11-26T22:20:55Z",
+              "issuer": "did:key:z6Mkj2kn6EauWqZcQ1rmshsLjEMUGdqAruxJfVKa6XBroSTi",
+              "issuer_label": "vector-dispute-issuer",
+              "prev_receipt_hash": "GENESIS",
+              "receipt_id": "rcpt_11acd98730bd489395c1da2777b6342f",
+              "receipt_version": "0.1",
+              "signature": "9qCXjYsprMI-RqpOf7qhuPUan_ff4efUHCZ9T_JgNtd2kVkjE3_YwUuGC6kV5UaF11Q3j9YPlue5qnOKZ5vuBw"
+            },
+            "prev_hash": "GENESIS",
+            "seq": 0,
+            "ts": "2026-11-26T22:20:56Z"
+          },
+          {
+            "entry_hash": "86a72d8fa41f3139a698e7504573b44e8c2613907c3c7f8c84c24402d9e0468c",
+            "kind": "dispute",
+            "object": {
+              "claim": "The net figure is wrong: the fee was taken twice.",
+              "dispute_id": "disp_dfb82656647b4e42b7fe72c7a2f2631a",
+              "dispute_version": "0.2",
+              "disputed_field": "action.args_public.net_usdc",
+              "disputer": "did:key:z6Mkhi59o1cGH3UfWP31wcRE5YkS88pbLNAph43moipa7zbU",
+              "disputer_label": "vector-disputer",
+              "evidence": "synthetic fixture evidence \u2014 recompute shows 0.05 - 0.0025 = 0.0475, not 0.045",
+              "filed_at": "2026-11-26T22:20:56Z",
+              "signature": "aXJJ8VfV83pokXzcNBInHiIM8ySSQWRzJvPfOTzVBF9XmfTlap2r_t3jyTBSsbomZXPatJYxkOLP8VJRjQU-CQ",
+              "target_receipt_id": "rcpt_11acd98730bd489395c1da2777b6342f",
+              "type": "dispute"
+            },
+            "prev_hash": "4afa8f7538b6c58e0405f20bda61583b9a21da3fefb1b75ee917bb5d34926f41",
+            "seq": 1,
+            "ts": "2026-11-26T22:20:56Z"
+          },
+          {
+            "entry_hash": "3acd728703692cef4fbb37f8172552997e28f00992a4843359bd4a80862d5139",
+            "kind": "dispute_resolution",
+            "object": {
+              "decision": "dispute_rejected",
+              "dispute_id": "disp_dfb82656647b4e42b7fe72c7a2f2631a",
+              "reason": "Recompute shows the fee applied once: 0.05 - 0.0025 = 0.0475. The stated net is correct.",
+              "resolution_id": "dres_0f0272fb3b38411b82cfbc722fca5f2a",
+              "resolution_version": "0.2",
+              "resolved_at": "2026-11-26T22:20:56Z",
+              "resolver": "did:key:z6Mkj2kn6EauWqZcQ1rmshsLjEMUGdqAruxJfVKa6XBroSTi",
+              "resolver_label": "vector-dispute-issuer",
+              "signature": "JThfkTAlCcniI_BHLuwkbEfZLQ-uUVI5fdKPoqJ7keOBV1esSNq10LzXxjrQ3ZWyrzGsoI5Rx90myx9O3R58CQ",
+              "target_receipt_id": "rcpt_11acd98730bd489395c1da2777b6342f",
+              "type": "dispute_resolution"
+            },
+            "prev_hash": "86a72d8fa41f3139a698e7504573b44e8c2613907c3c7f8c84c24402d9e0468c",
+            "seq": 2,
+            "ts": "2026-11-26T22:20:56Z"
+          }
+        ],
+        "registry": {
+          "issuers": [],
+          "registry_version": "0.1"
+        }
+      },
+      "kind": "verify",
+      "receipt": {
+        "action": {
+          "args_hash": "sha256:140943b5567ddac35245ff03afbf6a55b2efe744c637e5626dd4b79152a08097",
+          "args_public": {
+            "case": "dispute",
+            "fee_usdc": "0.0025",
+            "gross_usdc": "0.05",
+            "net_usdc": "0.0475",
+            "note": "synthetic receipt the dispute cases disagree with"
+          },
+          "result_hash": null,
+          "type": "vector.test"
+        },
+        "issued_at": "2026-11-26T22:20:55Z",
+        "issuer": "did:key:z6Mkj2kn6EauWqZcQ1rmshsLjEMUGdqAruxJfVKa6XBroSTi",
+        "issuer_label": "vector-dispute-issuer",
+        "prev_receipt_hash": "GENESIS",
+        "receipt_id": "rcpt_11acd98730bd489395c1da2777b6342f",
+        "receipt_version": "0.1",
+        "signature": "9qCXjYsprMI-RqpOf7qhuPUan_ff4efUHCZ9T_JgNtd2kVkjE3_YwUuGC6kV5UaF11Q3j9YPlue5qnOKZ5vuBw"
+      },
+      "synthetic": true,
+      "target_receipt_id": "rcpt_11acd98730bd489395c1da2777b6342f",
+      "why": "A resolution closes a dispute at most once and is itself permanent. The verifier's dispute_state moves from DISPUTED to DISPUTED \u2014 RESOLVED; the verdict stays VALID throughout. The disagreement and its outcome both stay on the record \u2014 neither is erased."
     },
     {
       "description": "Standing of musescout5 \u2014 the real probationary external issuer \u2014 recomputed from the published registries and log.",
@@ -919,7 +1179,7 @@
       },
       "id": "issuer-standing-unregistered",
       "inputs": {
-        "did": "did:key:z6Mki3y7w3Sy72AuTdLWj6dNVeQvFX15eDsnojDA7Dz4te98",
+        "did": "did:key:z6MkiEfcniAhRnGkJbgXPnMZJw69pJWVVBPxbgWDn864S4Ft",
         "log": "https://streampresence.github.io/receipts/receipts.jsonl",
         "registries": "suite"
       },
@@ -928,18 +1188,19 @@
       "why": "The negative control for standing: a valid Ed25519 key proves nothing about standing. Expected: registered = false, in_good_standing = false, receipt_count = 0. A verifier that treats 'has a key' as 'is an issuer' fails this case."
     }
   ],
+  "changes_in_1_1": "Two fixes from Zambo's external review of v1.0 (ARC Issue #6, 2026-11-26): (1) how_to_run.settlement_cases now specifies numeric Decimal comparison \u2014 v1.0's 'exactly as strings at 6dp' wording described a comparison that fails on the floor cases even when the arithmetic is right, because expected strings use the minimal-decimal rendering (0.0065, not 0.006500). (2) The dispute path is now exercised: two new SYNTHETIC fixture cases (dispute-open-marks-receipt, dispute-resolved-state) pin dispute_state DISPUTED and DISPUTED \u2014 RESOLVED. In v1.0 every case expected dispute_state null \u2014 consistent with a log containing no disputes, but untested. All v1.0 cases are unchanged in substance and re-observed against the current log.",
   "explainer": "conformance-vectors.md",
   "format_under_test": "Stream Presence receipts \u2014 SPEC.md (v0.1 core with v0.2 failure/dispute and v0.3 countersignature extensions)",
-  "generated_at": "2026-11-25T17:56:04Z",
+  "generated_at": "2026-11-26T22:20:55Z",
   "how_to_run": {
     "pass_meaning": "A pass means your verifier reaches the same verdicts as the reference recompute on the format's decision points \u2014 including the cases whose correct answer is INVALID or 'valid but unclosed'. It asserts nothing about the wisdom of the actions recorded (see SPEC.md, 'A verification asserts \u2014 and does not assert').",
-    "settlement_cases": "Apply settlement_rule to inputs.gross_usdc (or the payout receipt's args_public.gross_usdc) with Decimal arithmetic and compare fee/net exactly as strings at 6dp.",
+    "settlement_cases": "Apply settlement_rule to inputs.gross_usdc (or the payout receipt's args_public.gross_usdc) with Decimal arithmetic and compare fee/net NUMERICALLY as Decimal values. The rule quantizes the fee to 6 decimal places, but the expected strings are written in the receipts' minimal-decimal rendering (0.0065, not 0.006500): compare Decimal(yours) == Decimal(expected), never literal string equality at 6dp. (Corrected in suite v1.1 \u2014 v1.0's wording, 'exactly as strings at 6dp', described a comparison that fails on the floor cases even when the arithmetic is right. Flagged by Zambo's external review, 2026-11-26.)",
     "standing_cases": "Recompute standing from the registries + log (reference: a2a.issuer_standing) and compare the expected fields.",
     "verify_cases": "Write the case's log slice (lines 0..through_seq of the published log, or the embedded log_entries) as JSONL, the registries as issuers.json/registry.json, then run the reference recompute: core.verify_receipt(target_receipt_id, log_path, issuers_path, registry_path) with at_time pinned to the case's at_time. Compare verdict, issuer_class, the set of failing check names, and the countersignature/dispute states. Independent implementations should recompute per SPEC.md 'Verifying the operator' and compare the same fields."
   },
   "published_log": {
-    "chain_head_at_generation": "ec7c5f1ed0ea81d752d689a3a3df6b78d9ba9c36685f5ef344a22ff65c2524cc",
-    "entries_at_generation": 248,
+    "chain_head_at_generation": "542a5ea94623cfd62d5e7a49639fea19a53970c36b9e0a974343741c18de1a4c",
+    "entries_at_generation": 261,
     "url": "https://streampresence.github.io/receipts/receipts.jsonl"
   },
   "registries": {
@@ -1067,5 +1328,5 @@
   "settlement_rule": "fee = max(quantize(0.05 * gross, 6dp, ROUND_HALF_UP), 0.0005); net = gross - fee. Decimal arithmetic only; amounts are decimal strings (stats.py conventions).",
   "spec": "SPEC.md",
   "suite": "stream-presence-receipts-conformance",
-  "version": "1.0"
+  "version": "1.1"
 }

@@ -31,6 +31,8 @@ appends nothing anywhere.
 | `settlement-floor-below` | synthetic arithmetic | fee 0.0005 / net 0.0065 on gross 0.007 |
 | `settlement-rounding` | synthetic arithmetic | fee 0.006173 / net 0.117284 on gross 0.123457 |
 | `issuer-tier-fleet-vs-probationary` | synthetic fixture | both VALID; classes `fleet` vs `external_probationary` |
+| `dispute-open-marks-receipt` | synthetic fixture | VALID, `DISPUTED` — a dispute never changes the verdict |
+| `dispute-resolved-state` | synthetic fixture | VALID, `DISPUTED — RESOLVED` |
 | `issuer-standing-probationary-active` | real registries | musescout5: active, cap 20, 0 receipts |
 | `issuer-standing-pending-key` | real registries | nyna: `pending_key`, no did on file, cannot issue |
 | `issuer-standing-unregistered` | synthetic did, real registries | registered = false |
@@ -55,10 +57,20 @@ The decision points that matter most:
   check earlier, by the chain.) Synthetic, and labelled so in the
   file; it exists nowhere in the real log.
 - **Settlement arithmetic.** `fee = max(5% of gross, 0.0005)`,
-  `net = gross − fee`, Decimal only, amounts at 6 decimal places
-  with ROUND_HALF_UP. The suite includes the exact boundary where
-  the two branches meet (gross 0.01), a below-floor case, and a
-  rounding case (gross 0.123457, whose 5% runs to 7 places).
+  `net = gross − fee`, Decimal only; the fee is quantized to 6
+  decimal places with ROUND_HALF_UP, and amounts are compared
+  **numerically** as Decimals — the expected strings use the
+  receipts' minimal-decimal rendering (`0.0065`, not `0.006500`),
+  so literal string comparison at 6dp is the wrong test. The
+  suite includes the exact boundary where the two branches meet
+  (gross 0.01), a below-floor case, and a rounding case (gross
+  0.123457, whose 5% runs to 7 places).
+- **Disputes.** A signed dispute chained after a receipt leaves
+  the receipt VALID and reports `dispute_state = DISPUTED`; a
+  signed resolution moves it to `DISPUTED — RESOLVED`. The
+  disagreement route is a decision point of the format, so the
+  suite exercises it with a synthetic fixture (the real log
+  contains no disputes, and no real entry was created for this).
 - **Issuer tiers.** A fleet receipt and a probationary receipt of
   identical shape both verify VALID; the format's distinction is
   the reported `issuer_class` and the registry-carried terms
@@ -105,3 +117,14 @@ assert*, which applies to this suite unchanged.
 Corrections and additional vectors are welcome; a vector that
 makes a correct verifier disagree is a bug in the suite or in the
 verifier, and either way we want to know.
+
+## Version history
+
+- **v1.1 (2026-11-26)** — two fixes from Zambo's external review
+  of v1.0 (ARC Issue #6): the settlement-comparison instruction
+  now specifies numeric Decimal comparison (v1.0's "exactly as
+  strings at 6dp" wording failed on the floor cases even when
+  the arithmetic was right), and the dispute path is exercised
+  by two new synthetic fixture cases. All v1.0 cases are
+  unchanged in substance.
+- **v1.0 (2026-11-25)** — first publication, 14 cases.
